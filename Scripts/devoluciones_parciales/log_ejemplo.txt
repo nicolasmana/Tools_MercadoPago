@@ -1,0 +1,2 @@
+15372252= {"id":15372948,"payment_id":15372252,"amount":50.2,"metadata":{},"source":{"id":"296872085","name":"test test","type":"collector"},"date_created":"2018-08-09T12:01:04.530-04:00","unique_sequence_number":null,"status":"approved"},
+15372266= {"id":15372950,"payment_id":15372266,"amount":60,"metadata":{},"source":{"id":"296872085","name":"test test","type":"collector"},"date_created":"2018-08-09T12:01:05.493-04:00","unique_sequence_number":null,"status":"approved"},

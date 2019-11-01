@@ -1,0 +1,2 @@
+2,Pelota_001,https://www.mercadopago.com/mla/checkout/start?pref_id=296872085-76543d61-aaf0-46b7-b05d-525bf5165756,
+3,Remera_001,https://www.mercadopago.com/mla/checkout/start?pref_id=296872085-baed2f03-93f6-423f-ab4a-79e95eb21a29,

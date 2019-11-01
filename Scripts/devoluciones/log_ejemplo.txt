@@ -1,0 +1,5 @@
+
+15372809= {"id":15372819,"payment_id":15372809,"amount":14800,"metadata":{},"source":{"id":"296872085","name":"test test","type":"collector"},"date_created":"2018-08-09T11:51:40.522-04:00","unique_sequence_number":null,"status":"approved"},
+
+Si devuelve approved es que se pudo realizar la devolución
+

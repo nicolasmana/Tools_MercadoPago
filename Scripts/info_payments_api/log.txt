@@ -1,0 +1,31 @@
+
+4184705835,in_process,Robert,Sanders,16990,master
+4184705803,in_process,EDUARDO RODRIGO,PEREZ LIZANA,5990,visa
+4184994711,in_process,eduardo alexis,campos mu?oz,4990,visa
+4183803710,in_process,claudia,diaz,69990,visa
+4184701609,in_process,christofer,fernandez,279990,visa
+4184990410,in_process,Lucila,Aravena,1990,master
+4183803461,in_process,nicole,san martin,34980,visa
+4184513371,in_process,mouriel loreto,carrami?ana retamal,51920,master
+4183800171,in_process,Mar?a,In?s,4490,visa
+4184984348,in_process,camila,rojas,5970,visa
+4184694210,in_process,Michael,Vega,247760,master
+4183797294,in_process,Romina,Estuardo,649980,visa
+4184980569,in_process,andrea,romegialli,23850,visa
+4184849564,in_process,ISABEL,icespedes1458,112970,master
+4183795071,in_process,Jorge,Binder Igor,129990,cmr
+4183793305,in_process,Michel,San Martin,50970,visa
+4184688355,in_process,peproli,himura,35990,cmr
+4184688017,in_process,Federico,Zegpi Contreras,26990,master
+4184503565,in_process,Isidora,Amun?tegui,87930,visa
+4184503084,in_process,Ricardo,Giglio,69990,master
+4183792126,in_process,Isidora,Amun?tegui,87930,visa
+4184974658,in_process,Ricardo,Giglio,44990,master
+4183790465,in_process,Vinicio,Velasquez,49980,amex
+4184683228,in_process,Carmen,Sepulveda,21730,visa
+4184968412,in_process,Claudia,Franco,28980,master
+4184678982,in_process,karen,vollmer,27970,master
+4184476242,in_process,andrea,leal,16990,visa
+4183771398,in_process,daniela alejandra,salfate zuniga,7470,visa
+4183769836,in_process,gtapko,Tapia,337480,master
+4183768587,in_process,,lsaldanam,31970,visa

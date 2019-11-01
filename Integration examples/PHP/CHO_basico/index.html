@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="assets/appIcons.ico">
+
+    <title>Ejemplo de Checkout básico</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/form-validation.css" rel="stylesheet">
+
+  </head>
+
+  <body class="bg-light">
+
+    <div class="container">
+      <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="15">
+        <h2>Mi sitio</h2>
+        <p class="lead">Ejemplo para la creación de un Web Checkout</p>
+        <br>
+        <img src="https://imgmp.mlstatic.com/org-img/banners/ar/medios/785X40.jpg" title="MercadoPago - Medios de pago" alt="MercadoPago - Medios de pago" width="785" height="40"/>
+      </div>
+
+
+        <div class="col">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Tu carrito</span>
+            <span class="badge badge-secondary badge-pill">2</span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Pelota</h6>
+                <small class="text-muted">Balón Rusia 2018</small>
+              </div>
+              <span class="text-muted">$1000</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Botines</h6>
+                <small class="text-muted">Adidas Predator</small>
+              </div>
+              <span class="text-muted">$2500</span>
+            </li>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total</span>
+              <strong>$3500</strong>
+            </li>
+          </ul>
+
+
+
+            <!--Pagar-->
+                <!-- Botón de pago que llama al archivo en donde se crea la preferencia -->
+                <form  align="center" class="align_middle" method="post" enctype="multipart/form-data" action="index.php" novalidate>
+                    <input type="submit"  value="Pagar" class="btn btn-primary btn-lg"  ></input>
+                </form>
+
+            <br></br>
+
+
+          </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2019 MercadoPago</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="https://mercadopago.statuspage.io/#">Status Page</a></li>
+          <li class="list-inline-item"><a href="https://www.mercadopago.com.ar/ayuda/terminos-y-politicas_194">Terms</a></li>
+          <li class="list-inline-item"><a href="https://www.mercadopago.com.ar/developers/es/">Support</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="assets/jquery-slim.min.js"><\/script>')</script>
+    <script src="assets/popper.min.js"></script>
+    <script src="assets/bootstrap.min.js"></script>
+    <script src="assets/holder.min.js"></script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+    </script>
+  </body>
+</html>

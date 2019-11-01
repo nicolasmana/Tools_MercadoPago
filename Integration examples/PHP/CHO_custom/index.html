@@ -1,0 +1,426 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+    <link rel="icon" href="assets/appIcons.ico">
+
+    <title>Ejemplo de Checkout Custom</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/form-validation.css" rel="stylesheet">
+  </head>
+
+  <body class="bg-light">
+
+    <div class="container">
+      <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="50" height="50">
+        <h2>Mi sitio</h2>
+        <p class="lead">Formulario de ejemplo para la creación de un Custom Checkout</p>
+        <img src="https://imgmp.mlstatic.com/org-img/banners/ar/medios/785X40.jpg" title="MercadoPago - Medios de pago" alt="MercadoPago - Medios de pago" width="785" height="40"/>
+        <br>
+    </div>
+
+
+    <div class="col">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Tu carrito</span>
+            <span class="badge badge-secondary badge-pill">2</span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Pelota</h6>
+                <small class="text-muted">Balón Rusia 2018</small>
+              </div>
+              <span class="text-muted">$1000</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Botines</h6>
+                <small class="text-muted">Adidas Predator</small>
+              </div>
+              <span class="text-muted">$2500</span>
+            </li>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total</span>
+              <strong>$3500</strong>
+            </li>
+          </ul>
+    </div>
+
+    <br></br>
+
+    <form action="index.php" method="POST" id="pay" enctype="multipart/form-data" name="pay">
+
+
+<!--Listado de los items a completar-->
+        <fieldset>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <label for="email">Email</label>
+                    <input id="email" class="form-control"name="email" value="test_user_87179053@testuser.com" type="email" placeholder="your email" />
+                </li>
+                <br></br>
+
+
+                <!-- Creo el formulairo del cual voy a levantar los datos de la tarjeta -->
+                <!-- Para cada campo que debe tomar el js de MP debo agregarle el data-checkout -->
+                <li class="list-group-item"><h4>Datos de la tarjeta</h4>
+                  <ul class="list-group list-group-flush">
+
+
+                    <div class="row">
+
+                      <div class="col-md-6 mb-3">
+                        <li class="list-group-item">
+                            <label for="cardNumber">Credit card number:</label>
+                            <input class="form-control" type="text" value="4170068810108020"id="cardNumber" data-checkout="cardNumber" placeholder="4170068810108020" />
+
+                            <label id="issuer"  class="form-control" style="display:none" for="issuers"><select id="issuers" class="form-control" name="issuers"></select>
+                        </li>
+                      </div>
+
+                      <div class="col-md-6 mb-3">
+                        <li class="list-group-item" id="cvv">
+                            <label for="securityCode">Security code:</label>
+                            <!-- Este campo no debe tener name en el input para saber que no se envía al server -->
+                            <input type="text" class="form-control" value="123"id="securityCode" data-checkout="securityCode" placeholder="123" />
+                        </li>
+                      </div>
+
+                    </div>
+
+                    <div class="row">
+
+                      <div class="col-md-6 mb-3">
+                        <li class="list-group-item">
+                            <label for="cardExpirationMonth">Expiration month:</label>
+                            <input type="text" class="form-control" value="10"id="cardExpirationMonth" data-checkout="cardExpirationMonth" placeholder="12" />
+                        </li>
+                      </div>
+
+                      <div class="col-md-6 mb-3">
+                        <li class="list-group-item">
+                            <label for="cardExpirationYear">Expiration year:</label>
+                            <input type="text" class="form-control" value="2019"id="cardExpirationYear" data-checkout="cardExpirationYear" placeholder="2020" />
+                        </li>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+
+                      <div class="col-md-6 mb-3">
+                        <li class="list-group-item">
+                            <label for="docType">Document type:</label>
+                            <select class="form-control" id="docType" data-checkout="docType"></select>
+                        </li>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <li class="list-group-item">
+                            <label for="docNumber">Document number:</label>
+                            <input class="form-control" type="text" id="docNumber" data-checkout="docNumber" placeholder="25755291" />
+                        </li>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+
+                      <div class="col-md-6 mb-3">
+                        <li class="list-group-item">
+                            <label for="cardholderName">Card holder name:</label>
+                            <input type="text" class="form-control" value="APRO"id="cardholderName" data-checkout="cardholderName" placeholder="APRO" />
+                        </li>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <li class="list-group-item">
+                            <label for="installments">Cuotas:</label>
+                            <select class="form-control" id="installments" name="installments">
+                                <option value='-1'>Choose...</option>
+                            </select>
+                        </li>
+                      </div>
+
+                    </div>
+
+
+
+
+            </ul>
+            <input class="btn btn-primary btn-lg btn-block" type="submit" value="Pagar" />
+        </fieldset>
+
+    </form>
+
+    <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js"></script>
+    <script type="text/javascript">
+        var doSubmit = false,
+            amount = parseFloat("3500");
+        Mercadopago.setPublishableKey("TEST-7692186d-15d4-453a-b2fe-46633d424139");
+        if ("mla".indexOf("mlm") == -1) {
+            Mercadopago.getIdentificationTypes();
+        }
+
+
+
+        function addEvent(el, eventName, handler) {
+
+            if (el.addEventListener) {
+                el.addEventListener(eventName, handler);
+            } else {
+                el.attachEvent('on' + eventName, function() {
+                    handler.call(el);
+                });
+            }
+        };
+
+
+        function setInstallmentInfo(status, response) {
+            var selectorInstallments = document.querySelector("#installments"),
+                fragment = document.createDocumentFragment();
+            selectorInstallments.options.length = 0;
+            if (response.length > 0) {
+                var option = new Option("Choose...", '-1');
+                fragment.appendChild(option);
+
+                //Creo un array para generar el nuevo combo de cuotas
+                const newArray = [];
+                //mapeo una función para armar el nuevo array y que queden todos los datos en la misma estructura
+                response.map(function(elem) {
+                    elem.payer_costs.forEach(cuota => newArray.push({
+                        modoProcesamiento: elem.processing_mode,
+                        merchantAccountId: elem.merchant_account_id,
+                        numeroCuota: cuota.installments,
+                        interesCuota: cuota.installment_rate,
+                        mensajeRecomendado: cuota.recommended_message,
+                        medioPago: elem.payment_method_id,
+                        issuerId: elem.issuer.id,
+                        montoTotal: cuota.total_amount,
+                    }));
+                });
+                //desnormalizo el array en 1 solo array en lugar de subarrays
+                var arrayDesnormalizado = _.flattenDeep(newArray);
+                //Ordeno el array por menor interes
+                var resultFinal = _.sortBy(arrayDesnormalizado, function(arrayDesnormalizado) { return arrayDesnormalizado.interesCuota}, ['asc']);
+                //Agrupo el array por cuota
+                var resultFinal = _.groupBy(resultFinal, function(resultFinal) { return resultFinal.numeroCuota});
+                var mejoresCuotas = [];
+                //Saco el que tenga menor interes de cada cuota del array y le agrego el recommended_message
+                _.forEach(resultFinal, (value,key) => {mejoresCuotas.push(value[0]);
+                });
+                console.log(mejoresCuotas);
+                for(var i = 0; i < mejoresCuotas.length; i++){
+                    option = new Option(mejoresCuotas[i].mensajeRecomendado,mejoresCuotas[i].numeroCuota );
+                    fragment.appendChild(option);
+                }
+                //Agrego el array al combo de cuotas
+                selectorInstallments.appendChild(fragment);
+            }
+        };
+        function getBin() {
+            var ccNumber = document.querySelector('input[data-checkout="cardNumber"]');
+            return ccNumber ? ccNumber.value.replace(/ /g, '').replace(/-/g, '').replace(/\./g, '').slice(0, 6) : "";
+        };
+
+        function setPaymentMethod(paymentMethodId) {
+            var form = document.querySelector('#pay');
+            if (document.querySelector("input[name=paymentMethodId]") == null) {
+                var paymentMethod = document.createElement('input');
+                paymentMethod.setAttribute('name', "paymentMethodId");
+                paymentMethod.setAttribute('type', "hidden");
+                paymentMethod.setAttribute('value', paymentMethodId);
+
+                form.appendChild(paymentMethod);
+            } else {
+                document.querySelector("input[name=paymentMethodId]").value = paymentMethodId;
+            }
+        };
+
+        function clearOptions() {
+            var bin = getBin();
+            if (bin.length == 0) {
+                document.querySelector("#issuer").style.display = 'none';
+                document.querySelector("#issuers").innerHTML = "";
+
+                var selectorInstallments = document.querySelector("#installments"),
+                    fragment = document.createDocumentFragment(),
+                    option = new Option("Choose...", '-1');
+
+                selectorInstallments.options.length = 0;
+                fragment.appendChild(option);
+                selectorInstallments.appendChild(fragment);
+            }
+        }
+
+        function doPay(event) {
+
+            event.preventDefault();
+
+            if (!doSubmit) {
+                var $form = document.querySelector('#pay');
+
+                Mercadopago.createToken($form, sdkResponseHandler);
+
+                return false;
+            }
+        };
+
+        function sdkResponseHandler(status, response) {
+
+
+            if (status != 200 && status != 201) {
+
+                alert("verificar los datos cargados");
+
+            } else {
+
+                var form = document.querySelector('#pay');
+
+                var token = document.createElement('input');
+                token.setAttribute('name', "token");
+                token.setAttribute('type', "hidden");
+                token.setAttribute('value', response.id);
+
+                form.appendChild(token);
+
+                doSubmit = true;
+
+                form.submit();
+            }
+        };
+
+        function guessingPaymentMethod(event) {
+            var bin = getBin();
+
+            if (event.type == "keyup") {
+                if (bin.length == 6) {
+                    Mercadopago.getPaymentMethod({
+                        "bin": bin
+                    }, setPaymentMethodInfo);
+                }
+            } else {
+                setTimeout(function() {
+                    if (bin.length >= 6) {
+                        Mercadopago.getPaymentMethod({
+                            "bin": bin
+                        }, setPaymentMethodInfo);
+                    }
+                }, 100);
+            }
+        };
+
+        function setPaymentMethodInfo(status, response) {
+
+
+            if (status == 200) {
+
+                // do somethings ex: show logo of the payment method
+
+                setPaymentMethod(response[0].id);
+
+
+                // check if the security code (ex: Tarshop) is required
+                var cardConfiguration = response[0].settings,
+                    bin = getBin();
+
+                for (var index = 0; index < cardConfiguration.length; index++) {
+                    if (bin.match(cardConfiguration[index].bin.pattern) != null && cardConfiguration[index].security_code.length == 0) {
+                        document.querySelector("#cvv").style.display = "none";
+                    } else {
+                        document.querySelector("#cvv").style.display = "block";
+                    }
+                }
+
+                Mercadopago.getInstallments({
+                    "bin": bin,
+                    "amount": amount
+                }, setInstallmentInfo);
+
+                // check if the issuer is necessary to pay
+                var issuerMandatory = false,
+                    additionalInfo = response[0].additional_info_needed;
+
+                for (var i = 0; i < additionalInfo.length; i++) {
+                    if (additionalInfo[i] == "issuer_id") {
+                        issuerMandatory = true;
+                    }
+                };
+                if (issuerMandatory) {
+
+                    Mercadopago.getIssuers(response[0].id, showCardIssuers);
+
+                    addEvent(document.querySelector('#issuers'), 'change', setInstallmentsByIssuerId);
+
+                } else {
+                    document.querySelector("#issuer").style.display = 'none';
+                    document.querySelector("#issuers").options.length = 0;
+                }
+
+            }
+
+        };
+
+        function showCardIssuers(status, issuers) {
+            var issuersSelector = document.querySelector("#issuers"),
+                fragment = document.createDocumentFragment();
+            issuersSelector.options.length = 0;
+            var option = new Option("Choose...", '-1');
+            fragment.appendChild(option);
+            for (var i = 0; i < issuers.length; i++) {
+                if (issuers[i].name != "default") {
+                    option = new Option(issuers[i].name, issuers[i].id);
+                } else {
+                    option = new Option("Otro", issuers[i].id);
+                }
+                fragment.appendChild(option);
+            }
+            issuersSelector.appendChild(fragment);
+            issuersSelector.removeAttribute('disabled');
+            document.querySelector("#issuer").removeAttribute('style');
+            resizeModal("500", "400");
+        };
+
+        function setInstallmentsByIssuerId(status, response) {
+            var issuerId = document.querySelector('#issuers').value;
+            if (issuerId === '-1') {
+                return;
+            }
+            Mercadopago.getInstallments({
+                "bin": getBin(),
+                "amount": amount,
+                "issuer_id": issuerId
+            }, setInstallmentInfo);
+        };
+            addEvent(document.querySelector('input[data-checkout="cardNumber"]'), 'keyup', guessingPaymentMethod);
+            addEvent(document.querySelector('input[data-checkout="cardNumber"]'), 'change', guessingPaymentMethod);
+            addEvent(document.querySelector('input[data-checkout="cardNumber"]'), 'keyup', clearOptions);
+            addEvent(document.querySelector('#pay'), 'submit', doPay);
+    </script>
+
+
+
+   <footer class="my-5 pt-5 text-muted text-center text-small">
+
+			    <ul class="list-inline">
+              <li class="list-inline-item"><a href="https://mercadopago.statuspage.io/#">Status Page</a></li>
+              <li class="list-inline-item"><a href="https://www.mercadopago.com.ar/ayuda/terminos-y-politicas_194">Terms</a></li>
+              <li class="list-inline-item"><a href="https://www.mercadopago.com.ar/developers/es/">Support</a></li>
+		        </ul>
+            <p class="mb-1">&copy; 2018 MercadoPago</p>
+		 </footer>
+
+
+  </body>
+</html>

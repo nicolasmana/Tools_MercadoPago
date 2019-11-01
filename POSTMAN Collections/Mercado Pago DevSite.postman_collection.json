@@ -1,0 +1,3692 @@
+{
+	"info": {
+		"_postman_id": "14ec99fc-eae6-4280-9b56-82bf7f1d9392",
+		"name": "Mercado Pago DevSite",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pagos",
+			"item": [
+				{
+					"name": "Smart Checkout",
+					"item": [
+						{
+							"name": "Completo",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"items\": [\n\t\t{\n\t\t\t\"id\": \"item-ID-1234\",\n\t\t\t\"title\": \"Puerta\",\n\t\t\t\"currency_id\": \"ARS\",\n\t\t\t\"picture_url\": \"https://www.mercadopago.com/org-img/MP3/home/logomp3.gif\",\n\t\t\t\"description\": \"Puerta\",\n\t\t\t\"category_id\": \"art\", \n\t\t\t\"quantity\": 1,\n\t\t\t\"unit_price\": 6000\n\t\t} \n\t],\n\t\"back_urls\": {\n\t\t\"success\": \"https://www.google.com/\",\n\t\t\"failure\": \"https://www.google.com/\",\n\t\t\"pending\": \"https://www.google.com/\"\n\t},\n\t\"payer\":{\n\t\t\"email\":\"\",\n\t\t\"phone\": {\n            \"area_code\": \"549\",\n            \"number\": \"1139181918\"\n        }\n\t},\n\t\"auto_return\": \"approved\",\n    \"external_reference\":\"Referencia\",\n\t\"payment_methods\": {\n\t\t\"excluded_payment_methods\": [\n\t\t\t{\n\t\t\t\t\"id\": \"\"\n\t\t\t}\n\t\t],\n\t\t\"excluded_payment_types\": [\n\t\t\t{\n\t\t\t\t\"id\": \"\"\n\t\t\t}\n\t\t\t],\n\t\t\"installments\": 12,\n\t\t\"default_payment_method_id\":\"\",\n\t\t\"default_installments\": 6\n  }\n}\n"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/checkout/preferences?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"checkout",
+										"preferences"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Web Tokenize Checkout",
+					"item": [
+						{
+							"name": "Autorización y captura",
+							"item": [
+								{
+									"name": "Autorización ",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\n\t//Verificar si este feature está disponible en su país en: https://www.mercadopago.com.ar/developers/es/guides/localization/products/\n    \"transaction_amount\": 100,\n    \"token\": \"<card_token>\",\n    \"description\": \"Title of what you are paying for\",\n    \"installments\": 1,\n    \"metadata\":{\n    \t\"id\":\"\"\t\n    },\n    \"payment_method_id\": \"visa\",\n    \"capture\":false,\n    \"payer\": {\n        \"email\": \"<email>\"\n    },\n    \"external_reference\": \"Reference_1234\",\n    \"notification_url\": \"https://www.your-site.com/webhooks\",\n    \"additional_info\": {\n        \"items\": [\n            {\n                \"id\": \"item-ID-1234\",\n                \"title\": \"Title of what you are paying for\",\n                \"picture_url\": \"https://www.mercadopago.com/org-img/MP3/home/logomp3.gif\",\n                \"description\": \"Item description\",\n                \"category_id\": \"art\",\n                \"quantity\": 1,\n                \"unit_price\": 100\n            }\n        ],\n        \"payer\": {\n            \"first_name\": \"user-name\",\n            \"last_name\": \"user-surname\",\n            \"registration_date\": \"2015-06-02T12:58:41.425-04:00\",\n            \"phone\": {\n                \"area_code\": \"11\",\n                \"number\": \"4444-4444\"\n            },\n            \"address\": {\n                \"street_name\": \"Street\",\n                \"street_number\": 123,\n                \"zip_code\": \"5700\"\n            }\n\t\t        \n\t\t\t}\n                \n        \n        }\n    }\n"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/payments?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"payments"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Captura del pago",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n                \"capture\": true\n        }"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/payments/<payment_id>?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"payments",
+												"<payment_id>"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										},
+										"description": "Generated from a curl request: \ncurl -X PUT \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/payments/PAYMENT_ID?access_token=TEST-8524484575595708-121116-02378402b7103ae9e29c5afd507aeb92__LB_LA__-289886909' \\\n        -d '{\n                \\\"capture\\\": true\n        }'"
+									},
+									"response": []
+								},
+								{
+									"name": "Captura parcial ",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Cache-Control",
+												"value": "no-cache"
+											},
+											{
+												"key": "Connection",
+												"value": "keep-alive"
+											},
+											{
+												"key": "Host",
+												"value": "api.mercadopago.com"
+											},
+											{
+												"key": "Postman-Token",
+												"value": "3c0271d6-0198-428a-bd0d-4c9147234b79,1ea62328-b68c-4d18-8a43-cf41436a1e47"
+											},
+											{
+												"key": "User-Agent",
+												"value": "PostmanRuntime/7.15.0"
+											},
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "accept-encoding",
+												"value": "gzip, deflate"
+											},
+											{
+												"key": "cache-control",
+												"value": "no-cache"
+											},
+											{
+												"key": "content-length",
+												"value": "43"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\t\t\t\"transaction_amount\":50,\n                \"capture\": true\n        }\n        \n        \t//Verificar si este feature está disponible en su país en: https://www.mercadopago.com.ar/developers/es/guides/localization/products/"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/payments/<payment_id>?access_token=<card_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"payments",
+												"<payment_id>"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<card_token>"
+												}
+											]
+										},
+										"description": "Verificar si está disponible para tu país en: https://www.mercadopago.com.ar/developers/es/guides/localization/products/"
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Customers and cards",
+							"item": [
+								{
+									"name": "Asociar customer",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"email\": \"mailejemplo@gmail.com\"}"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/customers?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"customers"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										},
+										"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/customers?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799' \\\n        -d '{\\\"email\\\": \\\"test@test.com\\\"}'"
+									},
+									"response": []
+								},
+								{
+									"name": "Asociar tarjeta a customer",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"token\": \"<card_token>\"}\n\n//obtenido de la tokenización sea por formulario propio o con el tokenizador"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/customers/<customer_id>/cards?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"customers",
+												"<customer_id>",
+												"cards"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										},
+										"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/customers/[CUSTOMER_ID]/cards?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799' \\\n        -d '{\\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\"}'"
+									},
+									"response": []
+								},
+								{
+									"name": "Buscar tarjetas por cliente",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/customers/<customer_id>/cards?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"customers",
+												"<customer_id>",
+												"cards"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										},
+										"description": "Generated from a curl request: \ncurl -X GET \\\n        -H 'accept: application/json' \\\n        'https://api.mercadopago.com/v1/customers/[CUSTOMER_ID]/cards?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799'"
+									},
+									"response": []
+								},
+								{
+									"name": "Buscar tarjetas por mail",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/customers/search?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"customers",
+												"search"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										},
+										"description": "Generated from a curl request: \ncurl -X GET \\\n        -H 'accept: application/json' \\\n        'https://api.mercadopago.com/v1/customers/search?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799' \\\n        -d 'email=your.payer@email'"
+									},
+									"response": []
+								},
+								{
+									"name": "Generar nuevo token",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"card_id\": \"<card_id>\", \"security_code\":123}\n\n//obtenido luego de \"Asociar tarjeta a un customer\". Se puede buscar en \"Buscar tarjetas por mail\""
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/card_tokens?public_key=<public_key>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"card_tokens"
+											],
+											"query": [
+												{
+													"key": "public_key",
+													"value": "<public_key>"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Postear pago con cliente guardado",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": " {\n    \"transaction_amount\": 100,\n    \"token\": \"<card_token>\",\n    \"description\": \"Title of what you are paying for\",\n    \"installments\": 1,\n    \"metadata\":{\n    \t\"id\":\"\"\t\n    },\n    \"payment_method_id\": \"visa\",\n    \"payer\": {\n        \"id\": \"<customer_id>\"\n    },\n    \"external_reference\": \"Reference_1234\",\n    \"notification_url\": \"https://www.your-site.com/webhooks\",\n    \"additional_info\": {\n        \"items\": [\n            {\n                \"id\": \"item-ID-1234\",\n                \"title\": \"Title of what you are paying for\",\n                \"picture_url\": \"https://www.mercadopago.com/org-img/MP3/home/logomp3.gif\",\n                \"description\": \"Item description\",\n                \"category_id\": \"art\",\n                \"quantity\": 1,\n                \"unit_price\": 100\n            }\n        ],\n        \"payer\": {\n            \"first_name\": \"user-name\",\n            \"last_name\": \"user-surname\",\n            \"registration_date\": \"2015-06-02T12:58:41.425-04:00\",\n            \"phone\": {\n                \"area_code\": \"11\",\n                \"number\": \"4444-4444\"\n            },\n            \"address\": {\n                \"street_name\": \"Street\",\n                \"street_number\": 123,\n                \"zip_code\": \"5700\"\n            }\n\t\t        \n\t\t\t}\n                \n        \n        }\n    }\n"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/payments?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"payments"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										},
+										"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        https://api.mercadopago.com/v1/payments?access_token=USER_AT \\\n        -d '{\n                \\\"transaction_amount\\\": 550,\n                \\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\",\n                \\\"description\\\": \\\"Title of what you are paying for\\\",\n                \\\"installments\\\": 1,\n                \\\"payer\\\": {\n                        \\\"id\\\": \\\"12345678\\\"\n                },\n                \\\"payment_method_id\\\": \\\"visa\\\"\n        }'"
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Postear pago",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n    \"transaction_amount\": 100,\n    \"token\": \"<card_token>\",\n    \"description\": \"Title of what you are paying for\",\n    \"installments\": 1,\n    \"metadata\":{\n    \t\"id\":\"\"\t\n    },\n    \"payment_method_id\": \"visa\",\n    \"binary_mode\":true,//En caso de que se quiera quitar el estado \"pendiente\" del pago\n    \"payer\": {\n        \"email\": \"<email>\"\n    },\n    \"external_reference\": \"Reference_1234\",\n    \"notification_url\": \"https://www.your-site.com/webhooks\",\n    \"additional_info\": {\n        \"items\": [\n            {\n                \"id\": \"item-ID-1234\",\n                \"title\": \"Title of what you are paying for\",\n                \"picture_url\": \"https://www.mercadopago.com/org-img/MP3/home/logomp3.gif\",\n                \"description\": \"Item description\",\n                \"category_id\": \"art\",\n                \"quantity\": 1,\n                \"unit_price\": 100\n            }\n        ],\n        \"payer\": {\n            \"first_name\": \"user-name\",\n            \"last_name\": \"user-surname\",\n            \"registration_date\": \"2015-06-02T12:58:41.425-04:00\",\n            \"phone\": {\n                \"area_code\": \"11\",\n                \"number\": \"4444-4444\"\n            },\n            \"address\": {\n                \"street_name\": \"Street\",\n                \"street_number\": 123,\n                \"zip_code\": \"5700\"\n            }\n\t\t        \n\t\t\t}\n                \n        \n        }\n    }\n"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        https://api.mercadopago.com/v1/payments?access_token=USER_AT \\\n        -d '{\n                \\\"transaction_amount\\\": 550,\n                \\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\",\n                \\\"description\\\": \\\"Title of what you are paying for\\\",\n                \\\"installments\\\": 1,\n                \\\"payer\\\": {\n                        \\\"id\\\": \\\"12345678\\\"\n                },\n                \\\"payment_method_id\\\": \\\"visa\\\"\n        }'"
+							},
+							"response": []
+						},
+						{
+							"name": "Medios offline - Tickets",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n    \"transaction_amount\": 100,\n    \"description\": \"Title of what you are paying for\",\n    \"metadata\":{\n    \t\"id\":\"\"\t\n    },\n    \"payment_method_id\": \"rapipago\",   //https://api.mercadolibre.com/sites/MLA/payment_methods?marketplace=NONE (cambiar MLA por MLU, MCO, MLM, MPE, MLC para ver los medios de pago de tickets por país)\n    \"payer\": {\n        \"email\": \"testargentina@mail.com\"\n    },\n    \"external_reference\": \"Reference_1234\",\n    \"notification_url\": \"https://www.your-site.com/webhooks\",\n    \"additional_info\": {\n        \"items\": [\n            {\n                \"id\": \"item-ID-1234\",\n                \"title\": \"Title of what you are paying for\",\n                \"picture_url\": \"https://www.mercadopago.com/org-img/MP3/home/logomp3.gif\",\n                \"description\": \"Item description\",\n                \"category_id\": \"art\",\n                \"quantity\": 1,\n                \"unit_price\": 100\n            }\n        ],\n        \"payer\": {\n            \"first_name\": \"user-name\",\n            \"last_name\": \"user-surname\",\n            \"registration_date\": \"2015-06-02T12:58:41.425-04:00\",\n            \"phone\": {\n                \"area_code\": \"11\",\n                \"number\": \"4444-4444\"\n            },\n            \"address\": {\n                \"street_name\": \"Street\",\n                \"street_number\": 123,\n                \"zip_code\": \"5700\"\n            }\n\t\t        \n\t\t\t}\n                \n        \n        }\n    }"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        https://api.mercadopago.com/v1/payments?access_token=USER_AT \\\n        -d '{\n                \\\"transaction_amount\\\": 550,\n                \\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\",\n                \\\"description\\\": \\\"Title of what you are paying for\\\",\n                \\\"installments\\\": 1,\n                \\\"payer\\\": {\n                        \\\"id\\\": \\\"12345678\\\"\n                },\n                \\\"payment_method_id\\\": \\\"visa\\\"\n        }'"
+							},
+							"response": []
+						},
+						{
+							"name": "Medios offline - Webpay",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n \"transaction_amount\": 10000,\n \"description\": \"Title of what you are paying for\",\n \"payer\": {\n   \"email\": \"test_user_3931694@testuser.com\",\n   \"identification\": {\n     \"type\": \"RUT\",\n     \"number\": \"76262349\"\n   },\n   \"entity_type\": \"individual\"\n },\n \"transaction_details\": {\n   \"financial_institution\": \"1234\"\n },\n \"additional_info\": {\n   \"ip_address\": \"127.0.0.1\"\n },\n \"callback_url\": \"http://www.your-site.com\",\n \"payment_method_id\": \"webpay\"\n}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments?access_token=APP_USR-1013417158822792-111414-cf7af9a532eb83346763cb65f65eacdc-303659981",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "APP_USR-1013417158822792-111414-cf7af9a532eb83346763cb65f65eacdc-303659981"
+										}
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        https://api.mercadopago.com/v1/payments?access_token=USER_AT \\\n        -d '{\n                \\\"transaction_amount\\\": 550,\n                \\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\",\n                \\\"description\\\": \\\"Title of what you are paying for\\\",\n                \\\"installments\\\": 1,\n                \\\"payer\\\": {\n                        \\\"id\\\": \\\"12345678\\\"\n                },\n                \\\"payment_method_id\\\": \\\"visa\\\"\n        }'"
+							},
+							"response": []
+						},
+						{
+							"name": "Medios offline - PSE",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n \"transaction_amount\": 10000,\n \"description\": \"Title of what you are paying for\",\n \"payer\": {\n   \"email\": \"test_user_3931694@testuser.com\",\n   \"identification\": {\n     \"type\": \"CC\",\n     \"number\": \"76262349\"\n   },\n   \"entity_type\": \"individual\"\n },\n //Buscar las financial_institutions en https://api.mercadolibre.com/v1/payment_methods/search?public_key=<public_key>&id=pse\n \"transaction_details\": {\n   \"financial_institution\": \"1009\"\n },\n \"additional_info\": {\n   \"ip_address\": \"127.0.0.1\"\n },\n \"callback_url\": \"http://www.your-site.com\",\n \"payment_method_id\": \"pse\"\n}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "API Checkout",
+					"item": [
+						{
+							"name": "Autorización y captura",
+							"item": [
+								{
+									"name": "Autorización ",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\n\t//Verificar si este feature está disponible en su país en: https://www.mercadopago.com.ar/developers/es/guides/localization/products/\n    \"transaction_amount\": 100,\n    \"token\": \"<card_token>\",\n    \"description\": \"Title of what you are paying for\",\n    \"installments\": 1,\n    \"metadata\":{\n    \t\"id\":\"\"\t\n    },\n    \"payment_method_id\": \"visa\",\n    \"capture\":false,\n    \"payer\": {\n        \"email\": \"<email>\"\n    },\n    \"external_reference\": \"Reference_1234\",\n    \"notification_url\": \"https://www.your-site.com/webhooks\",\n    \"additional_info\": {\n        \"items\": [\n            {\n                \"id\": \"item-ID-1234\",\n                \"title\": \"Title of what you are paying for\",\n                \"picture_url\": \"https://www.mercadopago.com/org-img/MP3/home/logomp3.gif\",\n                \"description\": \"Item description\",\n                \"category_id\": \"art\",\n                \"quantity\": 1,\n                \"unit_price\": 100\n            }\n        ],\n        \"payer\": {\n            \"first_name\": \"user-name\",\n            \"last_name\": \"user-surname\",\n            \"registration_date\": \"2015-06-02T12:58:41.425-04:00\",\n            \"phone\": {\n                \"area_code\": \"11\",\n                \"number\": \"4444-4444\"\n            },\n            \"address\": {\n                \"street_name\": \"Street\",\n                \"street_number\": 123,\n                \"zip_code\": \"5700\"\n            }\n\t\t        \n\t\t\t}\n                \n        \n        }\n    }\n"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/payments?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"payments"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Captura del pago",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n                \"capture\": true\n        }"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/payments/<payment_id>?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"payments",
+												"<payment_id>"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										},
+										"description": "Generated from a curl request: \ncurl -X PUT \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/payments/PAYMENT_ID?access_token=TEST-8524484575595708-121116-02378402b7103ae9e29c5afd507aeb92__LB_LA__-289886909' \\\n        -d '{\n                \\\"capture\\\": true\n        }'"
+									},
+									"response": []
+								},
+								{
+									"name": "Captura parcial ",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Cache-Control",
+												"value": "no-cache"
+											},
+											{
+												"key": "Connection",
+												"value": "keep-alive"
+											},
+											{
+												"key": "Host",
+												"value": "api.mercadopago.com"
+											},
+											{
+												"key": "Postman-Token",
+												"value": "3c0271d6-0198-428a-bd0d-4c9147234b79,1ea62328-b68c-4d18-8a43-cf41436a1e47"
+											},
+											{
+												"key": "User-Agent",
+												"value": "PostmanRuntime/7.15.0"
+											},
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "accept-encoding",
+												"value": "gzip, deflate"
+											},
+											{
+												"key": "cache-control",
+												"value": "no-cache"
+											},
+											{
+												"key": "content-length",
+												"value": "43"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\t\t\t\"transaction_amount\":50,\n                \"capture\": true\n        }\n        \n        \t//Verificar si este feature está disponible en su país en: https://www.mercadopago.com.ar/developers/es/guides/localization/products/"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/payments/<payment_id>?access_token=<card_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"payments",
+												"<payment_id>"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<card_token>"
+												}
+											]
+										},
+										"description": "Verificar si está disponible para tu país en: https://www.mercadopago.com.ar/developers/es/guides/localization/products/"
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Customers and cards",
+							"item": [
+								{
+									"name": "Asociar customer",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"email\": \"mailejemplo@gmail.com\"}"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/customers?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"customers"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										},
+										"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/customers?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799' \\\n        -d '{\\\"email\\\": \\\"test@test.com\\\"}'"
+									},
+									"response": []
+								},
+								{
+									"name": "Asociar tarjeta a customer",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"token\": \"<card_token>\"}\n\n//obtenido de la tokenización sea por formulario propio o con el tokenizador"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/customers/<customer_id>/cards?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"customers",
+												"<customer_id>",
+												"cards"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										},
+										"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/customers/[CUSTOMER_ID]/cards?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799' \\\n        -d '{\\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\"}'"
+									},
+									"response": []
+								},
+								{
+									"name": "Buscar tarjetas por cliente",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/customers/<customer_id>/cards?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"customers",
+												"<customer_id>",
+												"cards"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										},
+										"description": "Generated from a curl request: \ncurl -X GET \\\n        -H 'accept: application/json' \\\n        'https://api.mercadopago.com/v1/customers/[CUSTOMER_ID]/cards?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799'"
+									},
+									"response": []
+								},
+								{
+									"name": "Buscar tarjetas por mail",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/customers/search?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"customers",
+												"search"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										},
+										"description": "Generated from a curl request: \ncurl -X GET \\\n        -H 'accept: application/json' \\\n        'https://api.mercadopago.com/v1/customers/search?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799' \\\n        -d 'email=your.payer@email'"
+									},
+									"response": []
+								},
+								{
+									"name": "Generar nuevo token",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"card_id\": \"<card_id>\", \"security_code\":123}\n\n//obtenido luego de \"Asociar tarjeta a un customer\". Se puede buscar en \"Buscar tarjetas por mail\""
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/card_tokens?public_key=<public_key>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"card_tokens"
+											],
+											"query": [
+												{
+													"key": "public_key",
+													"value": "<public_key>"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Postear pago con cliente guardado",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": " {\n    \"transaction_amount\": 100,\n    \"token\": \"<card_token>\",\n    \"description\": \"Title of what you are paying for\",\n    \"installments\": 1,\n    \"metadata\":{\n    \t\"id\":\"\"\t\n    },\n    \"payment_method_id\": \"visa\",\n    \"payer\": {\n        \"id\": \"<customer_id>\"\n    },\n    \"external_reference\": \"Reference_1234\",\n    \"notification_url\": \"https://www.your-site.com/webhooks\",\n    \"additional_info\": {\n        \"items\": [\n            {\n                \"id\": \"item-ID-1234\",\n                \"title\": \"Title of what you are paying for\",\n                \"picture_url\": \"https://www.mercadopago.com/org-img/MP3/home/logomp3.gif\",\n                \"description\": \"Item description\",\n                \"category_id\": \"art\",\n                \"quantity\": 1,\n                \"unit_price\": 100\n            }\n        ],\n        \"payer\": {\n            \"first_name\": \"user-name\",\n            \"last_name\": \"user-surname\",\n            \"registration_date\": \"2015-06-02T12:58:41.425-04:00\",\n            \"phone\": {\n                \"area_code\": \"11\",\n                \"number\": \"4444-4444\"\n            },\n            \"address\": {\n                \"street_name\": \"Street\",\n                \"street_number\": 123,\n                \"zip_code\": \"5700\"\n            }\n\t\t        \n\t\t\t}\n                \n        \n        }\n    }\n"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/payments?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"payments"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										},
+										"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        https://api.mercadopago.com/v1/payments?access_token=USER_AT \\\n        -d '{\n                \\\"transaction_amount\\\": 550,\n                \\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\",\n                \\\"description\\\": \\\"Title of what you are paying for\\\",\n                \\\"installments\\\": 1,\n                \\\"payer\\\": {\n                        \\\"id\\\": \\\"12345678\\\"\n                },\n                \\\"payment_method_id\\\": \\\"visa\\\"\n        }'"
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Tokenizar tarjeta (Para personalizado)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n\t\"card_number\": \"4509953566233704\",\n\t\"security_code\":\"123\",\n\t\"expiration_month\": 9, \n\t\"expiration_year\": 2019, \n\t\"cardholder\": { \n\t\t\"name\": \"APRO\", \n\t\t\"identification\": { \n\t\t\t\"number\": \"12345678\", \n\t\t\t\"type\": \"DNI\" \n\t\t} \n\t} \n}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/card_tokens?public_key=<public_key>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"card_tokens"
+									],
+									"query": [
+										{
+											"key": "public_key",
+											"value": "<public_key>"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Postear pago",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n    \"transaction_amount\": 100,\n    \"token\": \"<card_token>\",\n    \"description\": \"Title of what you are paying for\",\n    \"installments\": 1,\n    \"metadata\":{\n    \t\"id\":\"\"\t\n    },\n    \"payment_method_id\": \"visa\",\n    \"binary_mode\":true,//En caso de que se quiera quitar el estado \"pendiente\" del pago\n    \"payer\": {\n        \"email\": \"<email>\"\n    },\n    \"external_reference\": \"Reference_1234\",\n    \"notification_url\": \"https://www.your-site.com/webhooks\",\n    \"additional_info\": {\n        \"items\": [\n            {\n                \"id\": \"item-ID-1234\",\n                \"title\": \"Title of what you are paying for\",\n                \"picture_url\": \"https://www.mercadopago.com/org-img/MP3/home/logomp3.gif\",\n                \"description\": \"Item description\",\n                \"category_id\": \"art\",\n                \"quantity\": 1,\n                \"unit_price\": 100\n            }\n        ],\n        \"payer\": {\n            \"first_name\": \"user-name\",\n            \"last_name\": \"user-surname\",\n            \"registration_date\": \"2015-06-02T12:58:41.425-04:00\",\n            \"phone\": {\n                \"area_code\": \"11\",\n                \"number\": \"4444-4444\"\n            },\n            \"address\": {\n                \"street_name\": \"Street\",\n                \"street_number\": 123,\n                \"zip_code\": \"5700\"\n            }\n\t\t        \n\t\t\t}\n                \n        \n        }\n    }\n"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        https://api.mercadopago.com/v1/payments?access_token=USER_AT \\\n        -d '{\n                \\\"transaction_amount\\\": 550,\n                \\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\",\n                \\\"description\\\": \\\"Title of what you are paying for\\\",\n                \\\"installments\\\": 1,\n                \\\"payer\\\": {\n                        \\\"id\\\": \\\"12345678\\\"\n                },\n                \\\"payment_method_id\\\": \\\"visa\\\"\n        }'"
+							},
+							"response": []
+						},
+						{
+							"name": "Medios offline - Tickets",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n    \"transaction_amount\": 100,\n    \"description\": \"Title of what you are paying for\",\n    \"metadata\":{\n    \t\"id\":\"\"\t\n    },\n    \"payment_method_id\": \"rapipago\",   //https://api.mercadolibre.com/sites/MLA/payment_methods?marketplace=NONE (cambiar MLA por MLU, MCO, MLM, MPE, MLC para ver los medios de pago de tickets por país)\n    \"payer\": {\n        \"email\": \"testargentina@mail.com\"\n    },\n    \"external_reference\": \"Reference_1234\",\n    \"notification_url\": \"https://www.your-site.com/webhooks\",\n    \"additional_info\": {\n        \"items\": [\n            {\n                \"id\": \"item-ID-1234\",\n                \"title\": \"Title of what you are paying for\",\n                \"picture_url\": \"https://www.mercadopago.com/org-img/MP3/home/logomp3.gif\",\n                \"description\": \"Item description\",\n                \"category_id\": \"art\",\n                \"quantity\": 1,\n                \"unit_price\": 100\n            }\n        ],\n        \"payer\": {\n            \"first_name\": \"user-name\",\n            \"last_name\": \"user-surname\",\n            \"registration_date\": \"2015-06-02T12:58:41.425-04:00\",\n            \"phone\": {\n                \"area_code\": \"11\",\n                \"number\": \"4444-4444\"\n            },\n            \"address\": {\n                \"street_name\": \"Street\",\n                \"street_number\": 123,\n                \"zip_code\": \"5700\"\n            }\n\t\t        \n\t\t\t}\n                \n        \n        }\n    }"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        https://api.mercadopago.com/v1/payments?access_token=USER_AT \\\n        -d '{\n                \\\"transaction_amount\\\": 550,\n                \\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\",\n                \\\"description\\\": \\\"Title of what you are paying for\\\",\n                \\\"installments\\\": 1,\n                \\\"payer\\\": {\n                        \\\"id\\\": \\\"12345678\\\"\n                },\n                \\\"payment_method_id\\\": \\\"visa\\\"\n        }'"
+							},
+							"response": []
+						},
+						{
+							"name": "Medios offline - Webpay",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n \"transaction_amount\": 10000,\n \"description\": \"Title of what you are paying for\",\n \"payer\": {\n   \"email\": \"test_user_3931694@testuser.com\",\n   \"identification\": {\n     \"type\": \"RUT\",\n     \"number\": \"76262349\"\n   },\n   \"entity_type\": \"individual\"\n },\n \"transaction_details\": {\n   \"financial_institution\": \"1234\"\n },\n \"additional_info\": {\n   \"ip_address\": \"127.0.0.1\"\n },\n \"callback_url\": \"http://www.your-site.com\",\n \"payment_method_id\": \"webpay\"\n}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments?access_token=APP_USR-1013417158822792-111414-cf7af9a532eb83346763cb65f65eacdc-303659981",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "APP_USR-1013417158822792-111414-cf7af9a532eb83346763cb65f65eacdc-303659981"
+										}
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        https://api.mercadopago.com/v1/payments?access_token=USER_AT \\\n        -d '{\n                \\\"transaction_amount\\\": 550,\n                \\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\",\n                \\\"description\\\": \\\"Title of what you are paying for\\\",\n                \\\"installments\\\": 1,\n                \\\"payer\\\": {\n                        \\\"id\\\": \\\"12345678\\\"\n                },\n                \\\"payment_method_id\\\": \\\"visa\\\"\n        }'"
+							},
+							"response": []
+						},
+						{
+							"name": "Medios offline - PSE",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n \"transaction_amount\": 10000,\n \"description\": \"Title of what you are paying for\",\n \"payer\": {\n   \"email\": \"test_user_3931694@testuser.com\",\n   \"identification\": {\n     \"type\": \"CC\",\n     \"number\": \"76262349\"\n   },\n   \"entity_type\": \"individual\"\n },\n //Buscar las financial_institutions en https://api.mercadolibre.com/v1/payment_methods/search?public_key=<public_key>&id=pse\n \"transaction_details\": {\n   \"financial_institution\": \"1009\"\n },\n \"additional_info\": {\n   \"ip_address\": \"127.0.0.1\"\n },\n \"callback_url\": \"http://www.your-site.com\",\n \"payment_method_id\": \"pse\"\n}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Marketplace",
+			"item": [
+				{
+					"name": "Smart Checkout",
+					"item": [
+						{
+							"name": "Autorizar vendedor",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "<client_id>",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "<client_secret>",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "text"
+										},
+										{
+											"key": "code",
+											"value": "Ejemplo: TG-5a5f9de1e4b0e5542faa0eed-295343701 (obtenido del proceso de Oauth: https://www.mercadopago.com.ar/developers/es/guides/marketplace/web-checkout/create-marketplace/)",
+											"type": "text"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "https://www.mercadopago.com (redirect definida cuando se creó la application)",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/oauth/token",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_id=CLIENT_ID' \\\n     -d 'client_secret=CLIENT_SECRET' \\\n     -d 'grant_type=authorization_code' \\\n     -d 'code=AUTHORIZATION_CODE' \\\n     -d 'redirect_uri=REDIRECT_URI'"
+							},
+							"response": []
+						},
+						{
+							"name": "Checkout",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"items\": [\n\t\t{\n\t\t\t\"id\": \"item-ID-1234\",\n\t\t\t\"title\": \"Puerta\",\n\t\t\t\"currency_id\": \"ARS\",\n\t\t\t\"picture_url\": \"https://www.mercadopago.com/org-img/MP3/home/logomp3.gif\",\n\t\t\t\"description\": \"Puerta\",\n\t\t\t\"category_id\": \"art\", \n\t\t\t\"quantity\": 1,\n\t\t\t\"unit_price\": 6000\n\t\t} \n\t],\n\t\"back_urls\": {\n\t\t\"success\": \"https://www.google.com/\",\n\t\t\"failure\": \"https://www.google.com/\",\n\t\t\"pending\": \"https://www.google.com/\"\n\t},\n\t\"payer\":{\n\t\t\"email\":\"\",\n\t\t\"phone\": {\n            \"area_code\": \"549\",\n            \"number\": \"1139181918\"\n        }\n\t},\n\t\"auto_return\": \"approved\",\n    \"external_reference\":\"Referencia\",\n\t\"payment_methods\": {\n\t\t\"excluded_payment_methods\": [\n\t\t\t{\n\t\t\t\t\"id\": \"\"\n\t\t\t}\n\t\t],\n\t\t\"excluded_payment_types\": [\n\t\t\t{\n\t\t\t\t\"id\": \"\"\n\t\t\t}\n\t\t\t],\n\t\t\"installments\": 12,\n\t\t\"default_payment_method_id\":\"\",\n\t\t\"default_installments\": 6\n  },\n    \"marketplace_fee\": 3\n}"
+								},
+								"url": {
+									"raw": "https://api.mercadolibre.com/checkout/preferences?access_token=<credenciales obtenidas para el vendedor>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadolibre",
+										"com"
+									],
+									"path": [
+										"checkout",
+										"preferences"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<credenciales obtenidas para el vendedor>"
+										}
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n-H 'accept: application/json' \\\n-H 'content-type: application/json' \\\n'https://api.mercadolibre.com/checkout/preferences?access_token=SELLER_AT' \\\n-d '{\n    \\\"items\\\": [\n        {\n            \\\"title\\\": \\\"Item title\\\",\n            \\\"description\\\": \\\"Description\\\",\n            \\\"quantity\\\": 1,\n            \\\"unit_price\\\": 50,\n            \\\"currency_id\\\": \\\"ARS\\\",\n            \\\"picture_url\\\": \\\"https://www.mercadopago.com/org-img/MP3/home/logomp3.gif\\\"\n        }\n    ],\n    \\\"marketplace_fee\\\": 2.29\n}'"
+							},
+							"response": []
+						},
+						{
+							"name": "Refrescar credenciales Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_secret",
+											"value": "<access_token>",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "refresh_token",
+											"type": "text"
+										},
+										{
+											"key": "refresh_token",
+											"value": "<refresh token obtenido de \"Autorizar vendedor>",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/oauth/token",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=TEST-2586812683684232-112216-d8c0948a5460cdb4a12243adbd3ac046__LC_LA__-285984141' \\\n     -d 'grant_type=refresh_token' \\\n     -d 'refresh_token=USER_RT'"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Web Tokenize/API Checkout",
+					"item": [
+						{
+							"name": "Autorizar vendedor",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_secret",
+											"value": "<access_token>",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "text"
+										},
+										{
+											"key": "code",
+											"value": "Ejemplo: TG-5a5f9de1e4b0e5542faa0eed-295343701 (obtenido del proceso de Oauth: https://www.mercadopago.com.ar/developers/es/guides/marketplace/web-checkout/create-marketplace/)",
+											"type": "text"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "https://www.mercadopago.com (redirect definida cuando se creó la application)",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/oauth/token",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=TEST-2586812683684232-112216-d8c0948a5460cdb4a12243adbd3ac046__LC_LA__-285984141' \\\n     -d 'grant_type=authorization_code' \\\n     -d 'code=TG-5a15ddbfe4b06185908c0e05-285980401' \\\n     -d 'redirect_uri=http://www.mercadopago.com'"
+							},
+							"response": []
+						},
+						{
+							"name": "Refrescar credenciales",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_secret",
+											"value": "<access_token>",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "refresh_token",
+											"type": "text"
+										},
+										{
+											"key": "refresh_token",
+											"value": "<refresh token obtenido de \"Autorizar vendedor>",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/oauth/token",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=TEST-2586812683684232-112216-d8c0948a5460cdb4a12243adbd3ac046__LC_LA__-285984141' \\\n     -d 'grant_type=refresh_token' \\\n     -d 'refresh_token=USER_RT'"
+							},
+							"response": []
+						},
+						{
+							"name": "Cobrar en nombre de tu usuario",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"transaction_amount\": 100,\n    \"token\": \"<card_token>\",\n    \"description\": \"Title of what you are paying for\",\n    \"installments\": 1,\n    \"metadata\":{\n    \t\"id\":\"\"\t\n    },\n    \"payment_method_id\": \"visa\",\n    \"payer\": {\n        \"email\": \"<email>\"\n    },\n    \"external_reference\": \"Reference_1234\",\n    \"notification_url\": \"https://www.your-site.com/webhooks\",\n    \"additional_info\": {\n        \"items\": [\n            {\n                \"id\": \"item-ID-1234\",\n                \"title\": \"Title of what you are paying for\",\n                \"picture_url\": \"https://www.mercadopago.com/org-img/MP3/home/logomp3.gif\",\n                \"description\": \"Item description\",\n                \"category_id\": \"art\",\n                \"quantity\": 1,\n                \"unit_price\": 100\n            }\n        ],\n        \"payer\": {\n            \"first_name\": \"user-name\",\n            \"last_name\": \"user-surname\",\n            \"registration_date\": \"2015-06-02T12:58:41.425-04:00\",\n            \"phone\": {\n                \"area_code\": \"11\",\n                \"number\": \"4444-4444\"\n            },\n            \"address\": {\n                \"street_name\": \"Street\",\n                \"street_number\": 123,\n                \"zip_code\": \"5700\"\n            }\n\t\t        \n\t\t\t}\n \n        },\n                \"application_fee\": 3\n        }"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        https://api.mercadopago.com/v1/payments?access_token=USER_AT \\\n        -d '{\n                \\\"transaction_amount\\\": 100,\n                \\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\",\n                \\\"description\\\": \\\"Title of what you are paying for\\\",\n                \\\"installments\\\": 1,\n                \\\"payer\\\": {\n                        \\\"id\\\": \\\"12345678\\\"\n                },\n                \\\"payment_method_id\\\": \\\"visa\\\",\n                \\\"application_fee\\\": 2.56\n        }'"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Advanced Payments",
+					"item": [
+						{
+							"name": "Autorizar vendedor Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_secret",
+											"value": "<access_token>",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"type": "text"
+										},
+										{
+											"key": "code",
+											"value": "Ejemplo: TG-5a5f9de1e4b0e5542faa0eed-295343701 (obtenido del proceso de Oauth: https://www.mercadopago.com.ar/developers/es/guides/marketplace/web-checkout/create-marketplace/)",
+											"type": "text"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "https://www.mercadopago.com (redirect definida cuando se creó la application)",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/oauth/token",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=TEST-2586812683684232-112216-d8c0948a5460cdb4a12243adbd3ac046__LC_LA__-285984141' \\\n     -d 'grant_type=authorization_code' \\\n     -d 'code=TG-5a15ddbfe4b06185908c0e05-285980401' \\\n     -d 'redirect_uri=http://www.mercadopago.com'"
+							},
+							"response": []
+						},
+						{
+							"name": "Refrescar credenciales",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_secret",
+											"value": "<access_token>",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "refresh_token",
+											"type": "text"
+										},
+										{
+											"key": "refresh_token",
+											"value": "<refresh token obtenido de \"Autorizar vendedor>",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/oauth/token",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=TEST-2586812683684232-112216-d8c0948a5460cdb4a12243adbd3ac046__LC_LA__-285984141' \\\n     -d 'grant_type=refresh_token' \\\n     -d 'refresh_token=USER_RT'"
+							},
+							"response": []
+						},
+						{
+							"name": "Medios off",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\n\t//Chequear disponibilidad de feature en el país correspondiente en: https://www.mercadopago.com.ar/developers/es/guides/marketplace/advanced-payments/supported-payment-methods/\n\t\"payments\": [\n       {\n            \"date_of_expiration\": \"2018-07-22T21:52:49.000-04:00\",\n            \"transaction_amount\": 5000,\n            \"payment_method_id\": \"pagofacil\",\n            \"payment_type_id\":\"ticket\",\n           \"processing_mode\": \"aggregator\",\n           \"installments\":1\n       }\n   ],\n  \"disbursements\": [\n      {\n          \"amount\": 200.12,\n          \"external_reference\": \"externalRef123\",\n          \"collector_id\": 430595716,\n          \"application_fee\": 20,\n          \"money_release_days\": 3\n      },\n      {\n          \"amount\": 300,\n          \"external_reference\": \"externalRef123\",\n          \"collector_id\": 430597480,\n          \"application_fee\": 30.0,\n          \"money_release_days\": 3\n      }\n   ],\n    \"payer\": {\n       \"first_name\": \"Test\",\n       \"last_name\": \"Test\",\n        \"email\": \"test_user_69861899@testuser.com\",\n        \"identification\": {\n            \"type\": \"DNI\",\n            \"number\": 15635614680\n        }\n  },\n    \"order\": {\n    \"type\": \"mercadopago\",\n    \"id\": \"123123123123\"\n    },\n    \"external_reference\": \"externalRef123\",\n    \"description\": \"\",\n    \"binary_mode\": false,\n    \"metadata\": {},\n    \"additional_info\": {}\n}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/advanced_payments?access_token=MKT_ACCESS_TOKEN' ",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"advanced_payments"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "MKT_ACCESS_TOKEN' "
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Tokenizar tarjeta (Para personalizado) Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n\t\"card_number\": \"4509953566233704\",\n\t\"security_code\":\"123\",\n\t\"expiration_month\": 9, \n\t\"expiration_year\": 2019, \n\t\"cardholder\": { \n\t\t\"name\": \"APRO\", \n\t\t\"identification\": { \n\t\t\t\"number\": \"12345678\", \n\t\t\t\"type\": \"DNI\" \n\t\t} \n\t} \n}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/card_tokens?public_key=<public_key del dueño del marketplace>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"card_tokens"
+									],
+									"query": [
+										{
+											"key": "public_key",
+											"value": "<public_key del dueño del marketplace>"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pago dividido entre vendedores",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"payer\": {\n    \"email\": \"test@user.com\"\n  },  \n  \"payments\": [\n    {\n      \"payment_method_id\": \"visa\",\n      \"payment_type_id\": \"credit_card\",\n      \"token\": \"<token de la tarjeta>\",\n      \"transaction_amount\": 1000,\n      \"installments\": 1,\n      \"processing_mode\": \"aggregator\"\n    }\n  ],\n  \"disbursements\": [\n    {\n      \"amount\": 200,\n      \"external_reference\": \"ref-collector-1\",\n      \"collector_id\": \"<id del collector1>\",\n      \"application_fee\": 20,\n      \"money_release_days\": 30\n    },\n    {\n      \"amount\": 800,\n      \"external_reference\": \"ref-collector-2\",\n      \"collector_id\": \"<id del collector2>\",\n      \"application_fee\": 80,\n      \"money_release_days\": 30\n    }\n  ],\n  \"external_reference\": \"ref-transaction\"\n}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/advanced_payments?access_token=<access_token del dueño del marketplace>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"advanced_payments"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token del dueño del marketplace>"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Pagos presenciales (QR)",
+			"item": [
+				{
+					"name": "Stores",
+					"item": [
+						{
+							"name": "Crear Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c34a6e68-b8da-4553-be26-8b32e173af4c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "74c7a1f3-5be1-41f7-972c-7a6b1fb2df97",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\t\"name\": \"Sucursal Instore\",\n\t\"business_hours\": {\n\t\t\"monday\": [ {\n\t\t\t\"open\": \"08:00\",\n\t\t\t\"close\": \"13:00\" \n\t\t},\n\t\t{\n\t\t\t\"open\": \"15:00\",\n\t\t\t\"close\": \"18:00\" \n\t\t}], \n\t\t\"tuesday\": [\n\t\t{\n\t\t\t\"open\": \"08:00\",\n\t\t\t\"close\": \"18:00\" \n\t\t}], \n\t\t\"wednesday\": [\n\t\t\t\t{\n\t\t\t\"open\": \"07:00\",\n\t\t\t\"close\": \"10:00\" }\n\t\t] },\n\t\t\n\t\"location\": {\n\t\t\"street_number\": \"3039\", \n\t\t\"street_name\": \"Caseros\", \n\t\t\"city_name\": \"Belgrano\",\n\t\t\"state_name\": \"Capital Federal\", \n\t\t\"latitude\": -32.8897322, \n\t\t\"longitude\": -68.8443275, \n\t\t\"reference\": \"3er Piso\"\n\t},\n\t\"external_id\": \"1234\" \n}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/users/{{collector_id}}/stores?access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"users",
+										"{{collector_id}}",
+										"stores"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+										}
+									]
+								},
+								"description": "Creación de Store asociada a una cuenta de Mercadopago"
+							},
+							"response": [
+								{
+									"name": "Crear Store",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\t\"name\": \"Sucursal Instore\",\n\t\"business_hours\": {\n\t\t\"monday\": [ {\n\t\t\t\"open\": \"08:00\",\n\t\t\t\"close\": \"13:00\" \n\t\t},\n\t\t{\n\t\t\t\"open\": \"15:00\",\n\t\t\t\"close\": \"18:00\" \n\t\t}], \n\t\t\"tuesday\": [\n\t\t{\n\t\t\t\"open\": \"08:00\",\n\t\t\t\"close\": \"18:00\" \n\t\t}], \n\t\t\"wednesday\": [\n\t\t\t\t{\n\t\t\t\"open\": \"07:00\",\n\t\t\t\"close\": \"10:00\" }\n\t\t] },\n\t\t\n\t\"location\": {\n\t\t\"street_number\": \"3039\", \n\t\t\"street_name\": \"Caseros\", \n\t\t\"city_name\": \"Belgrano\",\n\t\t\"state_name\": \"Capital Federal\", \n\t\t\"latitude\": -32.8897322, \n\t\t\"longitude\": -68.8443275, \n\t\t\"reference\": \"3er Piso\"\n\t},\n\t\"external_id\": \"SUC010101\" \n}"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/users/446566691/stores?access_token=APP_USR-8499883828799661-062409-bf057c51fc05f87eba5608328f869879-446566691",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"users",
+												"446566691",
+												"stores"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "APP_USR-8499883828799661-062409-bf057c51fc05f87eba5608328f869879-446566691",
+													"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "GET Stores",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.mercadopago.com/users/{{collector_id}}/stores/search?limit=80&access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"users",
+										"{{collector_id}}",
+										"stores",
+										"search"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "80"
+										},
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+										}
+									]
+								},
+								"description": "Obtener todas las Sucursales asociadas a una cuenta."
+							},
+							"response": []
+						},
+						{
+							"name": "GET ONE Store",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Sucursal Instore2\",\n    \"location\": {\n        \"street_number\": \"1180\",\n        \"street_name\": \"Av. Santa Fe\",\n        \"city_name\": \"Recoleta\",\n        \"state_name\": \"Capital Federal\",\n        \"latitude\": -32.8897322,\n        \"longitude\": -68.8443275,\n        \"reference\": \"3er Piso\"\n    },\n    \"external_id\": \"Sucurs\"\n}\n"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/users/{{collector_id}}/stores/search?external_id={{external_id}}&access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"users",
+										"{{collector_id}}",
+										"stores",
+										"search"
+									],
+									"query": [
+										{
+											"key": "external_id",
+											"value": "{{external_id}}",
+											"description": "Es el external_id asignado al Store."
+										},
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+										}
+									]
+								},
+								"description": "Obtener una Sucursal por external_id."
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Store",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n            \"name\": \"Cambio Sucursal\",\n            \"business_hours\": {\n                \"monday\": [\n                    {\n                        \"open\": \"09:00\",\n                        \"close\": \"12:00\"\n                    },\n                    {\n                        \"open\": \"15:00\",\n                        \"close\": \"18:00\"\n                    }\n                ],\n                \"tuesday\": [\n                    {\n                        \"open\": \"08:00\",\n                        \"close\": \"18:00\"\n                    }\n                ],\n                \"wednesday\": [\n                    {\n                        \"open\": \"07:00\",\n                        \"close\": \"10:00\"\n                    }\n                ]\n            },\n            \"location\": {\n            \t\"street_number\": \"13298\",\n\t\t\t\t\"street_name\": \"H. Yrigoyen \",\n   \t\t\t    \"city_name\": \"Almirante Brown\",\n\t\t\t    \"state_name\": \"Buenos Aires\",\n                \"reference\": \"2do Piso\",\n                \"latitude\": -32.8897322,\n                \"longitude\": -68.8443275\n            }\n        }"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/users/{{collector_id}}/stores/{{store_id}}?access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"users",
+										"{{collector_id}}",
+										"stores",
+										"{{store_id}}"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+										}
+									]
+								},
+								"description": "Modificar una Sucursal de una cuenta."
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Store",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n            \"name\": \"Cambio Sucursal332\",\n            \"business_hours\": {\n                \"monday\": [\n                    {\n                        \"open\": \"09:00\",\n                        \"close\": \"12:00\"\n                    },\n                    {\n                        \"open\": \"15:00\",\n                        \"close\": \"18:00\"\n                    }\n                ],\n                \"tuesday\": [\n                    {\n                        \"open\": \"08:00\",\n                        \"close\": \"18:00\"\n                    }\n                ],\n                \"wednesday\": [\n                    {\n                        \"open\": \"07:00\",\n                        \"close\": \"10:00\"\n                    }\n                ]\n            },\n            \"location\": {\n            \t\"street_number\": \"13298\",\n\t\t\t\t\"street_name\": \"H. Yrigoyen \",\n   \t\t\t    \"city_name\": \"Almirante Brown\",\n\t\t\t    \"state_name\": \"Buenos Aires\",\n                \"reference\": \"2do Piso\",\n                \"latitude\": -32.8897322,\n                \"longitude\": -68.8443275\n            }\n        }"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/users/{{collector_id}}/stores/{{store_id}}?access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"users",
+										"{{collector_id}}",
+										"stores",
+										"{{store_id}}"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+										}
+									]
+								},
+								"description": "Eliminar una Sucursal de una cuenta."
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "QRs",
+					"item": [
+						{
+							"name": "Crear QR",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Caja Principal\",\n    \"fixed_amount\": true,\n    \"category\": 621102,\n    \"store_id\": \"123456\",\n    \"external_id\": \"4lph4num3r1c\"\n}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/pos?access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"pos"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago\n"
+										}
+									]
+								},
+								"description": "Crear QR asociado a un Store_id"
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener códigos QR",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/pos?access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"pos"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+										}
+									]
+								},
+								"description": "Obtener todos los códigos QRs de una cuenta."
+							},
+							"response": []
+						},
+						{
+							"name": "GET QR by POSid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.mercadopago.com/pos/{{pos_id}}?access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"pos",
+										"{{pos_id}}"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+										}
+									]
+								},
+								"description": "Obtener un QR por su pos_id."
+							},
+							"response": []
+						},
+						{
+							"name": "GET QR by ExternalID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.mercadopago.com/pos?external_id={{external_id}}&access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"pos"
+									],
+									"query": [
+										{
+											"key": "external_id",
+											"value": "{{external_id}}",
+											"description": "Es el external_id asignado al QR."
+										},
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+										}
+									]
+								},
+								"description": "Obtener un QR por su external_id."
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar QR",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fixed_amount\": true,\n  \"name\": \"CambioQR\",\n  \"category\": 621102\n}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/pos/{{pos_id}}?access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"pos",
+										"{{pos_id}}"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+										}
+									]
+								},
+								"description": "Modificar un QR asociado a una cuenta."
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE QR",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"name\":\"EJEMPLO\"\n}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/pos/{{pos_id}}?access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"pos",
+										"{{pos_id}}"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+										}
+									]
+								},
+								"description": "Eliminar un QR de una cuenta."
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Orders",
+					"item": [
+						{
+							"name": "Generar orden por external_id",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"external_reference\": \"id de transacción interno\", \n\t\"notification_url\": \"www.yourserver.com/yourendpoint\",\n\t\"sponsor_id\": 446560529,\n\t\"items\" :[{\n\t\t\"title\" : \"Shampoo\", \n\t\t\"currency_id\" : \"ARS\", \n\t\t\"unit_price\" : 120.0,\n\t\t\"quantity\" : 1\n\t},{\n\n\t\t\"title\" : \"Gaseosa\", \n\t\t\"currency_id\" : \"ARS\", \n\t\t\"unit_price\" : 100.0, \n\t\t\"quantity\" : 1\n\t}]\n\n}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/mpmobile/instore/qr/{{collector_id}}/{{external_id}}?access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"mpmobile",
+										"instore",
+										"qr",
+										"{{collector_id}}",
+										"{{external_id}}"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+										}
+									]
+								},
+								"description": "Enviar una orden a un QR definido por su external_id."
+							},
+							"response": []
+						},
+						{
+							"name": "Generar orden por pos_id",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"external_reference\": \"id de transacción interno\", \n\t\"notification_url\": \"www.yourserver.com/yourendpoint\",\n\t\"sponsor_id\": 1234567,\n\n\t\"items\" :[{\n\t\t\"title\" : \"Shampoo\", \n\t\t\"currency_id\" : \"ARS\", \n\t\t\"unit_price\" : 120.0,\n\t\t\"quantity\" : 1\n\t},{\n\n\t\t\"title\" : \"Gaseosa\", \n\t\t\"currency_id\" : \"ARS\", \n\t\t\"unit_price\" : 100.0, \n\t\t\"quantity\" : 1\n\t}]\n\t\n\n}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/mpmobile/instore/qr/{{pos_id}}?access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"mpmobile",
+										"instore",
+										"qr",
+										"{{pos_id}}"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+										}
+									]
+								},
+								"description": "Enviar una orden a un QR definido por su pos_id."
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelar una orden por External_id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/mpmobile/instore/qr/{{collector_id}}/{{external_id}}?access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"mpmobile",
+										"instore",
+										"qr",
+										"{{collector_id}}",
+										"{{external_id}}"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+										}
+									]
+								},
+								"description": "Cancelar una orden creada antes del timeout , haciendo referencia al External ID"
+							},
+							"response": []
+						},
+						{
+							"name": "Cancelar una orden por Pos_id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/mpmobile/instore/qr/{{pos_id}}?access_token={{access_token}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"mpmobile",
+										"instore",
+										"qr",
+										"{{pos_id}}"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "{{access_token}}",
+											"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+										}
+									]
+								},
+								"description": "Cancelar una orden generada a un POS ID específico"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "GET Merchant Order by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.mercadopago.com/merchant_orders/{{merchant_order_id}}?access_token={{access_token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"mercadopago",
+								"com"
+							],
+							"path": [
+								"merchant_orders",
+								"{{merchant_order_id}}"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}",
+									"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+								}
+							]
+						},
+						"description": "Obtener los datos de una merchant order por su id."
+					},
+					"response": []
+				},
+				{
+					"name": "Search MerchantOrder by external_reference",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.mercadopago.com/merchant_orders?external_reference={{external_reference}}&access_token={{access_token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"mercadopago",
+								"com"
+							],
+							"path": [
+								"merchant_orders"
+							],
+							"query": [
+								{
+									"key": "external_reference",
+									"value": "{{external_reference}}",
+									"description": "Referencia externa ingresada en la orden. "
+								},
+								{
+									"key": "access_token",
+									"value": "{{access_token}}",
+									"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+								}
+							]
+						},
+						"description": "Buscar una merchant order por referencia externa."
+					},
+					"response": []
+				},
+				{
+					"name": "GET Payments by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.mercadopago.com/v1/payments/{{payment_id}}?access_token={{access_token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"mercadopago",
+								"com"
+							],
+							"path": [
+								"v1",
+								"payments",
+								"{{payment_id}}"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}",
+									"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
+								}
+							]
+						},
+						"description": "Obtener payments por su id."
+					},
+					"response": []
+				},
+				{
+					"name": "Search Payment by external_reference",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.mercadopago.com/v1/payments/search?limit=30&range=date_created&begin_date=2019-8-4T00:00:00.001-04:00&end_date=2019-9-4T23:59:59.999-04:00&sort=date_created&criteria=desc&access_token=APP_USR-8499883828799661-062409-bf057c51fc05f87eba5608328f869879-446566691&external_reference=",
+							"protocol": "https",
+							"host": [
+								"api",
+								"mercadopago",
+								"com"
+							],
+							"path": [
+								"v1",
+								"payments",
+								"search"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "30"
+								},
+								{
+									"key": "range",
+									"value": "date_created"
+								},
+								{
+									"key": "begin_date",
+									"value": "2019-8-4T00:00:00.001-04:00"
+								},
+								{
+									"key": "end_date",
+									"value": "2019-9-4T23:59:59.999-04:00"
+								},
+								{
+									"key": "sort",
+									"value": "date_created"
+								},
+								{
+									"key": "criteria",
+									"value": "desc"
+								},
+								{
+									"key": "access_token",
+									"value": "APP_USR-8499883828799661-062409-bf057c51fc05f87eba5608328f869879-446566691"
+								},
+								{
+									"key": "external_reference",
+									"value": ""
+								}
+							]
+						},
+						"description": "Buscar un pago por referencia externa."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Test User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.mercadopago.com/users/test_user?access_token={{access_token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"mercadopago",
+								"com"
+							],
+							"path": [
+								"users",
+								"test_user"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}",
+									"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago\n"
+								}
+							]
+						},
+						"description": "Crear usuarios de testing para una cuenta."
+					},
+					"response": []
+				},
+				{
+					"name": "Devolver pago",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.mercadopago.com/v1/payments/{{payment_id}}/refunds?access_token={{access_token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"mercadopago",
+								"com"
+							],
+							"path": [
+								"v1",
+								"payments",
+								"{{payment_id}}",
+								"refunds"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}",
+									"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago\n"
+								}
+							]
+						},
+						"description": "Realizar una devolución total de un pago por su payment_id."
+					},
+					"response": []
+				},
+				{
+					"name": "Devolver pago Parcial",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 10\n}"
+						},
+						"url": {
+							"raw": "https://api.mercadopago.com/v1/payments/{{payment_id}}/refunds?access_token={{access_token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"mercadopago",
+								"com"
+							],
+							"path": [
+								"v1",
+								"payments",
+								"{{payment_id}}",
+								"refunds"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}"
+								}
+							]
+						},
+						"description": "Realizar una devolución parcial de un pago por su payment_id."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gestión de cuenta",
+			"item": [
+				{
+					"name": "Reportes",
+					"item": [
+						{
+							"name": "Dinero en cuenta",
+							"item": [
+								{
+									"name": "Crear Reporte de dinero en cuenta",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n            \"begin_date\": \"2019-07-01T00:00:01Z\",\n            \"end_date\": \"2019-07-01T23:59:59Z\"\n    }"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/account/settlement_report?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"account",
+												"settlement_report"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Consultar reportes de dinero en cuenta disponibles",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/account/settlement_report/list?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"account",
+												"settlement_report",
+												"list"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Descargar reporte de dinero en cuenta disponible",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/account/settlement_report/<file_name>?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"account",
+												"settlement_report",
+												"<file_name>"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Dinero disponible",
+							"item": [
+								{
+									"name": "Crear Reporte de dinero en cuenta",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n            \"begin_date\": \"2019-07-01T00:00:01Z\",\n            \"end_date\": \"2019-07-01T23:59:59Z\"\n    }"
+										},
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/account/bank_report?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"account",
+												"bank_report"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Consultar reportes de dinero en cuenta disponibles",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/account/bank_report/list?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"account",
+												"bank_report",
+												"list"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Descargar reporte de dinero en cuenta disponible",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://api.mercadopago.com/v1/account/bank_report/<file_name>?access_token=<access_token>",
+											"protocol": "https",
+											"host": [
+												"api",
+												"mercadopago",
+												"com"
+											],
+											"path": [
+												"v1",
+												"account",
+												"bank_report",
+												"<file_name>"
+											],
+											"query": [
+												{
+													"key": "access_token",
+													"value": "<access_token>"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Payment Search y otros recursos",
+					"item": [
+						{
+							"name": "Search de pagos general",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments/search?access_token=<access_token>&sort=date_created&criteria=desc",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments",
+										"search"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										},
+										{
+											"key": "sort",
+											"value": "date_created"
+										},
+										{
+											"key": "criteria",
+											"value": "desc"
+										},
+										{
+											"key": "status",
+											"value": "approved",
+											"disabled": true
+										},
+										{
+											"key": "payment_method_id",
+											"value": "visa",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search de un pago por payment_id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments/<payment_id>?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments",
+										"<payment_id>"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										},
+										{
+											"key": null,
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search de un pago por external_reference",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments/search?external_reference=<external_reference>&access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments",
+										"search"
+									],
+									"query": [
+										{
+											"key": "external_reference",
+											"value": "<external_reference>"
+										},
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search de pagos por rango de fecha",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments/search?access_token=<access_token>&range=date_created&begin_date=2019-7-23T00:00:00.001-04:00&end_date=2019-7-23T23:59:59.999-04:00&sort=date_created&criteria=desc",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments",
+										"search"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										},
+										{
+											"key": "range",
+											"value": "date_created"
+										},
+										{
+											"key": "begin_date",
+											"value": "2019-7-23T00:00:00.001-04:00"
+										},
+										{
+											"key": "end_date",
+											"value": "2019-7-23T23:59:59.999-04:00"
+										},
+										{
+											"key": "sort",
+											"value": "date_created"
+										},
+										{
+											"key": "criteria",
+											"value": "desc"
+										},
+										{
+											"key": null,
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Medios de pago disponibles",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "Se puede reemplazar MLA por los otros países para ver todos los medios de pago correspondientes: \n-MLA: Argentina\n-MLU: Uruguay\n-MLC: Chile\n-MCO: Colombia\n-MLM: México\n-MPE: Perú"
+								},
+								"url": {
+									"raw": "https://api.mercadolibre.com/sites/MLA/payment_methods?marketplace=NONE",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadolibre",
+										"com"
+									],
+									"path": [
+										"sites",
+										"MLA",
+										"payment_methods"
+									],
+									"query": [
+										{
+											"key": "marketplace",
+											"value": "NONE"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detalle del medios de pago",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "Se puede reemplazar MLA por los otros países para ver todos los medios de pago correspondientes: \n-MLA: Argentina\n-MLU: Uruguay\n-MLC: Chile\n-MCO: Colombia\n-MLM: México\n-MPE: Perú\n\nAsí como también visa por el resto de los medios de pago del país obtenidos en \"Medios de pago disponibles\""
+								},
+								"url": {
+									"raw": "https://api.mercadolibre.com/sites/MLA/payment_methods/visa?marketplace=NONE",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadolibre",
+										"com"
+									],
+									"path": [
+										"sites",
+										"MLA",
+										"payment_methods",
+										"visa"
+									],
+									"query": [
+										{
+											"key": "marketplace",
+											"value": "NONE"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Medios de pago de tu cuenta",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "Se pueden agregar ciertos parámetros para filtrar los medios de pago, como \"processing_mode\": gateway"
+								},
+								"url": {
+									"raw": "https://api.mercadolibre.com/v1/payment_methods/search?public_key=<public_key>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadolibre",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payment_methods",
+										"search"
+									],
+									"query": [
+										{
+											"key": "public_key",
+											"value": "<public_key>"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cuotas disponibles por tarjeta",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "Se pueden agregar ciertos parámetros para filtrar los medios de pago, como \"processing_mode\": gateway"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payment_methods/installments?public_key=<public_key>&bin=<primeros 6 digitos de la tarjeta>&amount=<monto>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payment_methods",
+										"installments"
+									],
+									"query": [
+										{
+											"key": "public_key",
+											"value": "<public_key>"
+										},
+										{
+											"key": "bin",
+											"value": "<primeros 6 digitos de la tarjeta>"
+										},
+										{
+											"key": "amount",
+											"value": "<monto>"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verificar estado de mi access token",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "Se puede ingresar su access token, o el access token obtenido para un vendedor en el marketplace. \nSi devuelve un resultado quiere decir que está activo y funciona. Si no devuelve nada quiere decir que el access token caducó y hay que refrescarlo en la página de credenciales/volver a asociar al vendedor al markeptlace"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/users/me?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"users",
+										"me"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Conversión de moneda",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "Se puede ingresar su access token, o el access token obtenido para un vendedor en el marketplace. \nSi devuelve un resultado quiere decir que está activo y funciona. Si no devuelve nada quiere decir que el access token caducó y hay que refrescarlo en la página de credenciales/volver a asociar al vendedor al markeptlace"
+								},
+								"url": {
+									"raw": "https://api.mercadolibre.com/currency_conversions/search?from=USD&to=ARS",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadolibre",
+										"com"
+									],
+									"path": [
+										"currency_conversions",
+										"search"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "USD"
+										},
+										{
+											"key": "to",
+											"value": "ARS"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Devoluciones y cancelaciones",
+					"item": [
+						{
+							"name": "Cancelacion de un pago en pending",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"status\":\"cancelled\"}"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments/<payment_id>?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments",
+										"<payment_id>"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								},
+								"description": "Sirve para pagos offline"
+							},
+							"response": []
+						},
+						{
+							"name": "Devolución de un pago",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments/<payment_id>/refunds?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments",
+										"<payment_id>",
+										"refunds"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n-H \\\"Content-Type: application/json\\\" \\\n'https://api.mercadopago.com/v1/payments/3329531741/refunds?access_token=TEST-8524484575595708-121116-02378402b7103ae9e29c5afd507aeb92__LB_LA__-289886909'"
+							},
+							"response": []
+						},
+						{
+							"name": "Devolucion parcial",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"amount\":10}\n\n\t//Verificar si este feature está disponible en su país en: https://www.mercadopago.com.ar/developers/es/guides/localization/products/"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments/<payment_id>/refunds?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments",
+										"<payment_id>",
+										"refunds"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n-H \\\"Content-Type: application/json\\\" \\\n'https://api.mercadopago.com/v1/payments/:ID/refunds?access_token=TEST-8524484575595708-121116-02378402b7103ae9e29c5afd507aeb92__LB_LA__-289886909' \\\n-d '{\\\"amount\\\":10.5}'"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Gateway",
+			"item": [
+				{
+					"name": "Web Checkout",
+					"item": [
+						{
+							"name": "Completo",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"items\": [\n\t\t{\n\t\t\t\"id\": \"item-ID-1234\",\n\t\t\t\"title\": \"Puerta\",\n\t\t\t\"currency_id\": \"ARS\",\n\t\t\t\"picture_url\": \"https://www.mercadopago.com/org-img/MP3/home/logomp3.gif\",\n\t\t\t\"description\": \"Puerta\",\n\t\t\t\"category_id\": \"art\", \n\t\t\t\"quantity\": 1,\n\t\t\t\"unit_price\": 6000\n\t\t} \n\t],\n\t\"back_urls\": {\n\t\t\"success\": \"https://www.google.com/\",\n\t\t\"failure\": \"https://www.google.com/\",\n\t\t\"pending\": \"https://www.google.com/\"\n\t},\n\t\"processing_mode\":\"gateway\", //Solamente disponible para MLA y MCO\n\t//https://www.mercadopago.com.ar/developers/es/guides/gateway/web-checkout/receiving-payments/\n\t\"payer\":{\n\t\t\"email\":\"\",\n\t\t\"phone\": {\n            \"area_code\": \"549\",\n            \"number\": \"1139181918\"\n        }\n\t},\n\t\"auto_return\": \"approved\",\n    \"external_reference\":\"Referencia\",\n\t\"payment_methods\": {\n\t\t\"excluded_payment_methods\": [\n\t\t\t{\n\t\t\t\t\"id\": \"\"\n\t\t\t}\n\t\t],\n\t\t\"excluded_payment_types\": [\n\t\t\t{\n\t\t\t\t\"id\": \"\"\n\t\t\t}\n\t\t\t],\n\t\t\"installments\": 12,\n\t\t\"default_payment_method_id\":\"\",\n\t\t\"default_installments\": 6\n  }\n}\n"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/checkout/preferences?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"checkout",
+										"preferences"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Tokenize/API Checkout",
+					"item": [
+						{
+							"name": "Postear pago",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n    \"transaction_amount\": 100,\n    \"token\": \"<card_token>\",\n    \"description\": \"Title of what you are paying for\",\n    \"installments\": 1,\n    \"metadata\":{\n    \t\"id\":\"\"\t\n    },\n    \"payment_method_id\": \"visa\",\n    \"binary_mode\":true,//En caso de que se quiera quitar el estado \"pendiente\" del pago\n    //Documentacion https://www.mercadopago.com.ar/developers/es/guides/gateway/api/receiving-payments/\n    \"processing_mode\":\"gateway\"\n    \"merchant_account_id\":{ID}\n    \"payment_method_option_id\": '{ID}',\n    \"payer\": {\n        \"email\": \"<email>\"\n    },\n    \"external_reference\": \"Reference_1234\",\n    \"notification_url\": \"https://www.your-site.com/webhooks\",\n    \"additional_info\": {\n        \"items\": [\n            {\n                \"id\": \"item-ID-1234\",\n                \"title\": \"Title of what you are paying for\",\n                \"picture_url\": \"https://www.mercadopago.com/org-img/MP3/home/logomp3.gif\",\n                \"description\": \"Item description\",\n                \"category_id\": \"art\",\n                \"quantity\": 1,\n                \"unit_price\": 100\n            }\n        ],\n        \"payer\": {\n            \"first_name\": \"user-name\",\n            \"last_name\": \"user-surname\",\n            \"registration_date\": \"2015-06-02T12:58:41.425-04:00\",\n            \"phone\": {\n                \"area_code\": \"11\",\n                \"number\": \"4444-4444\"\n            },\n            \"address\": {\n                \"street_name\": \"Street\",\n                \"street_number\": 123,\n                \"zip_code\": \"5700\"\n            }\n\t\t        \n\t\t\t}\n                \n        \n        }\n    }\n"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payments?access_token=<access_token>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payments"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "<access_token>"
+										}
+									]
+								},
+								"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        https://api.mercadopago.com/v1/payments?access_token=USER_AT \\\n        -d '{\n                \\\"transaction_amount\\\": 550,\n                \\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\",\n                \\\"description\\\": \\\"Title of what you are paying for\\\",\n                \\\"installments\\\": 1,\n                \\\"payer\\\": {\n                        \\\"id\\\": \\\"12345678\\\"\n                },\n                \\\"payment_method_id\\\": \\\"visa\\\"\n        }'"
+							},
+							"response": []
+						},
+						{
+							"name": "Medios de pago disponibles",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "Se puede reemplazar MLA por los otros países para ver todos los medios de pago correspondientes: \n-MLA: Argentina\n-MLU: Uruguay\n-MLC: Chile\n-MCO: Colombia\n-MLM: México\n-MPE: Perú"
+								},
+								"url": {
+									"raw": "https://api.mercadolibre.com/sites/MLA/payment_methods?marketplace=NONE",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadolibre",
+										"com"
+									],
+									"path": [
+										"sites",
+										"MLA",
+										"payment_methods"
+									],
+									"query": [
+										{
+											"key": "marketplace",
+											"value": "NONE"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cuotas disponibles por tarjeta",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "Se pueden agregar ciertos parámetros para filtrar los medios de pago, como \"processing_mode\": gateway"
+								},
+								"url": {
+									"raw": "https://api.mercadopago.com/v1/payment_methods/installments?public_key=<public_key>&bin=<primeros 6 digitos de la tarjeta>&amount=<monto>",
+									"protocol": "https",
+									"host": [
+										"api",
+										"mercadopago",
+										"com"
+									],
+									"path": [
+										"v1",
+										"payment_methods",
+										"installments"
+									],
+									"query": [
+										{
+											"key": "public_key",
+											"value": "<public_key>"
+										},
+										{
+											"key": "bin",
+											"value": "<primeros 6 digitos de la tarjeta>"
+										},
+										{
+											"key": "amount",
+											"value": "<monto>"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Test users",
+			"item": [
+				{
+					"name": "Test User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"site_id\":\"MLA\"}"
+						},
+						"url": {
+							"raw": "https://api.mercadopago.com/users/test_user?access_token=<access_token>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"mercadopago",
+								"com"
+							],
+							"path": [
+								"users",
+								"test_user"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "<access_token>"
+								}
+							]
+						},
+						"description": "Generated from a curl request: \ncurl -X POST \\\n-H \\\"Content-Type: application/json\\\" \\\n\\\"https://api.mercadopago.com.ar/users/test_user?access_token=TEST-6650181566641288-091809-00f2f73f22c060eaca634fb8a5afa3b9__LB_LD__-270171469\\\" \\\n-d '{\\\"site_id\\\":\\\"MLA\\\"}'"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
