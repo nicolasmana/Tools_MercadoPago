@@ -138,7 +138,7 @@
 												}
 											]
 										},
-										"description": "Generated from a curl request: \ncurl -X PUT \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/payments/PAYMENT_ID?access_token=TEST-8524484575595708-121116-02378402b7103ae9e29c5afd507aeb92__LB_LA__-289886909' \\\n        -d '{\n                \\\"capture\\\": true\n        }'"
+										"description": "Generated from a curl request: \ncurl -X PUT \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/payments/PAYMENT_ID?access_token=<ACCESS_TOKEN> \\\n        -d '{\n                \\\"capture\\\": true\n        }'"
 									},
 									"response": []
 								},
@@ -259,7 +259,7 @@
 												}
 											]
 										},
-										"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/customers?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799' \\\n        -d '{\\\"email\\\": \\\"test@test.com\\\"}'"
+										"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/customers?access_token=<access_toiken>' \\\n        -d '{\\\"email\\\": \\\"test@test.com\\\"}'"
 									},
 									"response": []
 								},
@@ -302,7 +302,7 @@
 												}
 											]
 										},
-										"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/customers/[CUSTOMER_ID]/cards?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799' \\\n        -d '{\\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\"}'"
+										"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/customers/[CUSTOMER_ID]/cards?access_token=<ACCESS_TOKEN>' \\\n        -d '{\\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\"}'"
 									},
 									"response": []
 								},
@@ -337,7 +337,7 @@
 												}
 											]
 										},
-										"description": "Generated from a curl request: \ncurl -X GET \\\n        -H 'accept: application/json' \\\n        'https://api.mercadopago.com/v1/customers/[CUSTOMER_ID]/cards?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799'"
+										"description": "Generated from a curl request: \ncurl -X GET \\\n        -H 'accept: application/json' \\\n        'https://api.mercadopago.com/v1/customers/[CUSTOMER_ID]/cards?access_token=<ACCESS_TOKEN>'"
 									},
 									"response": []
 								},
@@ -371,7 +371,7 @@
 												}
 											]
 										},
-										"description": "Generated from a curl request: \ncurl -X GET \\\n        -H 'accept: application/json' \\\n        'https://api.mercadopago.com/v1/customers/search?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799' \\\n        -d 'email=your.payer@email'"
+										"description": "Generated from a curl request: \ncurl -X GET \\\n        -H 'accept: application/json' \\\n        'https://api.mercadopago.com/v1/customers/search?access_token=<ACCESS_TOKEN>' \\\n        -d 'email=your.payer@email'"
 									},
 									"response": []
 								},
@@ -705,7 +705,7 @@
 												}
 											]
 										},
-										"description": "Generated from a curl request: \ncurl -X PUT \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/payments/PAYMENT_ID?access_token=TEST-8524484575595708-121116-02378402b7103ae9e29c5afd507aeb92__LB_LA__-289886909' \\\n        -d '{\n                \\\"capture\\\": true\n        }'"
+										"description": "Generated from a curl request: \ncurl -X PUT \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/payments/PAYMENT_ID?access_token=<ACCESS_TOKEN>' \\\n        -d '{\n                \\\"capture\\\": true\n        }'"
 									},
 									"response": []
 								},
@@ -826,7 +826,7 @@
 												}
 											]
 										},
-										"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/customers?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799' \\\n        -d '{\\\"email\\\": \\\"test@test.com\\\"}'"
+										"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/customers?access_token=<ACCESS_TOKEN>' \\\n        -d '{\\\"email\\\": \\\"test@test.com\\\"}'"
 									},
 									"response": []
 								},
@@ -869,7 +869,7 @@
 												}
 											]
 										},
-										"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/customers/[CUSTOMER_ID]/cards?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799' \\\n        -d '{\\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\"}'"
+										"description": "Generated from a curl request: \ncurl -X POST \\\n        -H 'accept: application/json' \\\n        -H 'content-type: application/json' \\\n        'https://api.mercadopago.com/v1/customers/[CUSTOMER_ID]/cards?access_token=<ACCCESS_TOKEN>' \\\n        -d '{\\\"token\\\": \\\"ff8080814c11e237014c1ff593b57b4d\\\"}'"
 									},
 									"response": []
 								},
@@ -904,7 +904,7 @@
 												}
 											]
 										},
-										"description": "Generated from a curl request: \ncurl -X GET \\\n        -H 'accept: application/json' \\\n        'https://api.mercadopago.com/v1/customers/[CUSTOMER_ID]/cards?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799'"
+										"description": "Generated from a curl request: \ncurl -X GET \\\n        -H 'accept: application/json' \\\n        'https://api.mercadopago.com/v1/customers/[CUSTOMER_ID]/cards?access_token=<ACCESS_TOKEN>'"
 									},
 									"response": []
 								},
@@ -938,7 +938,7 @@
 												}
 											]
 										},
-										"description": "Generated from a curl request: \ncurl -X GET \\\n        -H 'accept: application/json' \\\n        'https://api.mercadopago.com/v1/customers/search?access_token=TEST-7302067546693431-120616-31404442065ca893b9105d1079cb6db1__LD_LB__-257631799' \\\n        -d 'email=your.payer@email'"
+										"description": "Generated from a curl request: \ncurl -X GET \\\n        -H 'accept: application/json' \\\n        'https://api.mercadopago.com/v1/customers/search?access_token=<ACCESS_TOKEN>' \\\n        -d 'email=your.payer@email'"
 									},
 									"response": []
 								},
@@ -1389,7 +1389,7 @@
 										"token"
 									]
 								},
-								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=TEST-2586812683684232-112216-d8c0948a5460cdb4a12243adbd3ac046__LC_LA__-285984141' \\\n     -d 'grant_type=refresh_token' \\\n     -d 'refresh_token=USER_RT'"
+								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=<ACCESS_TOKEN>' \\\n     -d 'grant_type=refresh_token' \\\n     -d 'refresh_token=USER_RT'"
 							},
 							"response": []
 						}
@@ -1451,7 +1451,7 @@
 										"token"
 									]
 								},
-								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=TEST-2586812683684232-112216-d8c0948a5460cdb4a12243adbd3ac046__LC_LA__-285984141' \\\n     -d 'grant_type=authorization_code' \\\n     -d 'code=TG-5a15ddbfe4b06185908c0e05-285980401' \\\n     -d 'redirect_uri=http://www.mercadopago.com'"
+								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=<ACCESS_TOKEN>' \\\n     -d 'grant_type=authorization_code' \\\n     -d 'code=TG-5a15ddbfe4b06185908c0e05-285980401' \\\n     -d 'redirect_uri=http://www.mercadopago.com'"
 							},
 							"response": []
 						},
@@ -1502,7 +1502,7 @@
 										"token"
 									]
 								},
-								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=TEST-2586812683684232-112216-d8c0948a5460cdb4a12243adbd3ac046__LC_LA__-285984141' \\\n     -d 'grant_type=refresh_token' \\\n     -d 'refresh_token=USER_RT'"
+								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=<ACCESS_TOKEN>' \\\n     -d 'grant_type=refresh_token' \\\n     -d 'refresh_token=USER_RT'"
 							},
 							"response": []
 						},
@@ -1605,7 +1605,7 @@
 										"token"
 									]
 								},
-								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=TEST-2586812683684232-112216-d8c0948a5460cdb4a12243adbd3ac046__LC_LA__-285984141' \\\n     -d 'grant_type=authorization_code' \\\n     -d 'code=TG-5a15ddbfe4b06185908c0e05-285980401' \\\n     -d 'redirect_uri=http://www.mercadopago.com'"
+								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=<ACCESS_TOKEN>' \\\n     -d 'grant_type=authorization_code' \\\n     -d 'code=TG-5a15ddbfe4b06185908c0e05-285980401' \\\n     -d 'redirect_uri=http://www.mercadopago.com'"
 							},
 							"response": []
 						},
@@ -1656,7 +1656,7 @@
 										"token"
 									]
 								},
-								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=TEST-2586812683684232-112216-d8c0948a5460cdb4a12243adbd3ac046__LC_LA__-285984141' \\\n     -d 'grant_type=refresh_token' \\\n     -d 'refresh_token=USER_RT'"
+								"description": "Generated from a curl request: \ncurl -X POST \\\n     -H 'accept: application/json' \\\n     -H 'content-type: application/x-www-form-urlencoded' \\\n     'https://api.mercadopago.com/oauth/token' \\\n     -d 'client_secret=----' \\\n     -d 'grant_type=refresh_token' \\\n     -d 'refresh_token=USER_RT'"
 							},
 							"response": []
 						},
@@ -3422,7 +3422,7 @@
 										}
 									]
 								},
-								"description": "Generated from a curl request: \ncurl -X POST \\\n-H \\\"Content-Type: application/json\\\" \\\n'https://api.mercadopago.com/v1/payments/3329531741/refunds?access_token=TEST-8524484575595708-121116-02378402b7103ae9e29c5afd507aeb92__LB_LA__-289886909'"
+								"description": "Generated from a curl request: \ncurl -X POST \\\n-H \\\"Content-Type: application/json\\\" \\\n'https://api.mercadopago.com/v1/payments/3329531741/refunds?access_token=----'"
 							},
 							"response": []
 						},
@@ -3461,7 +3461,7 @@
 										}
 									]
 								},
-								"description": "Generated from a curl request: \ncurl -X POST \\\n-H \\\"Content-Type: application/json\\\" \\\n'https://api.mercadopago.com/v1/payments/:ID/refunds?access_token=TEST-8524484575595708-121116-02378402b7103ae9e29c5afd507aeb92__LB_LA__-289886909' \\\n-d '{\\\"amount\\\":10.5}'"
+								"description": "Generated from a curl request: \ncurl -X POST \\\n-H \\\"Content-Type: application/json\\\" \\\n'https://api.mercadopago.com/v1/payments/:ID/refunds?access_token=----' \\\n-d '{\\\"amount\\\":10.5}'"
 							},
 							"response": []
 						}
@@ -3682,7 +3682,7 @@
 								}
 							]
 						},
-						"description": "Generated from a curl request: \ncurl -X POST \\\n-H \\\"Content-Type: application/json\\\" \\\n\\\"https://api.mercadopago.com.ar/users/test_user?access_token=TEST-6650181566641288-091809-00f2f73f22c060eaca634fb8a5afa3b9__LB_LD__-270171469\\\" \\\n-d '{\\\"site_id\\\":\\\"MLA\\\"}'"
+						"description": "Generated from a curl request: \ncurl -X POST \\\n-H \\\"Content-Type: application/json\\\" \\\n\\\"https://api.mercadopago.com.ar/users/test_user?access_token=---\\\" \\\n-d '{\\\"site_id\\\":\\\"MLA\\\"}'"
 					},
 					"response": []
 				}
