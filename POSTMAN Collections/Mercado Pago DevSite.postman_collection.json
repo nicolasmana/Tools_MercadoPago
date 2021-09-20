@@ -556,7 +556,7 @@
 									"raw": " {\n \"transaction_amount\": 10000,\n \"description\": \"Title of what you are paying for\",\n \"payer\": {\n   \"email\": \"test_user_3931694@testuser.com\",\n   \"identification\": {\n     \"type\": \"RUT\",\n     \"number\": \"76262349\"\n   },\n   \"entity_type\": \"individual\"\n },\n \"transaction_details\": {\n   \"financial_institution\": \"1234\"\n },\n \"additional_info\": {\n   \"ip_address\": \"127.0.0.1\"\n },\n \"callback_url\": \"http://www.your-site.com\",\n \"payment_method_id\": \"webpay\"\n}"
 								},
 								"url": {
-									"raw": "https://api.mercadopago.com/v1/payments?access_token=APP_USR-1013417158822792-111414-cf7af9a532eb83346763cb65f65eacdc-303659981",
+									"raw": "https://api.mercadopago.com/v1/payments?access_token=----",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -570,7 +570,7 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "APP_USR-1013417158822792-111414-cf7af9a532eb83346763cb65f65eacdc-303659981"
+											"value": "----"
 										}
 									]
 								},
@@ -1167,7 +1167,7 @@
 									"raw": " {\n \"transaction_amount\": 10000,\n \"description\": \"Title of what you are paying for\",\n \"payer\": {\n   \"email\": \"test_user_3931694@testuser.com\",\n   \"identification\": {\n     \"type\": \"RUT\",\n     \"number\": \"76262349\"\n   },\n   \"entity_type\": \"individual\"\n },\n \"transaction_details\": {\n   \"financial_institution\": \"1234\"\n },\n \"additional_info\": {\n   \"ip_address\": \"127.0.0.1\"\n },\n \"callback_url\": \"http://www.your-site.com\",\n \"payment_method_id\": \"webpay\"\n}"
 								},
 								"url": {
-									"raw": "https://api.mercadopago.com/v1/payments?access_token=APP_USR-1013417158822792-111414-cf7af9a532eb83346763cb65f65eacdc-303659981",
+									"raw": "https://api.mercadopago.com/v1/payments?access_token=----",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -1181,7 +1181,7 @@
 									"query": [
 										{
 											"key": "access_token",
-											"value": "APP_USR-1013417158822792-111414-cf7af9a532eb83346763cb65f65eacdc-303659981"
+											"value": "----"
 										}
 									]
 								},
@@ -1876,7 +1876,7 @@
 											"raw": "{\t\"name\": \"Sucursal Instore\",\n\t\"business_hours\": {\n\t\t\"monday\": [ {\n\t\t\t\"open\": \"08:00\",\n\t\t\t\"close\": \"13:00\" \n\t\t},\n\t\t{\n\t\t\t\"open\": \"15:00\",\n\t\t\t\"close\": \"18:00\" \n\t\t}], \n\t\t\"tuesday\": [\n\t\t{\n\t\t\t\"open\": \"08:00\",\n\t\t\t\"close\": \"18:00\" \n\t\t}], \n\t\t\"wednesday\": [\n\t\t\t\t{\n\t\t\t\"open\": \"07:00\",\n\t\t\t\"close\": \"10:00\" }\n\t\t] },\n\t\t\n\t\"location\": {\n\t\t\"street_number\": \"3039\", \n\t\t\"street_name\": \"Caseros\", \n\t\t\"city_name\": \"Belgrano\",\n\t\t\"state_name\": \"Capital Federal\", \n\t\t\"latitude\": -32.8897322, \n\t\t\"longitude\": -68.8443275, \n\t\t\"reference\": \"3er Piso\"\n\t},\n\t\"external_id\": \"SUC010101\" \n}"
 										},
 										"url": {
-											"raw": "https://api.mercadopago.com/users/446566691/stores?access_token=APP_USR-8499883828799661-062409-bf057c51fc05f87eba5608328f869879-446566691",
+											"raw": "https://api.mercadopago.com/users/446566691/stores?access_token=----",
 											"protocol": "https",
 											"host": [
 												"api",
@@ -1891,7 +1891,7 @@
 											"query": [
 												{
 													"key": "access_token",
-													"value": "APP_USR-8499883828799661-062409-bf057c51fc05f87eba5608328f869879-446566691",
+													"value": "----",
 													"description": "El access token productivo se encuentra disponible en : https://www.mercadopago.com/mco/account/credentials , ingresando con user / password de la cuenta de Mercadopago"
 												}
 											]
@@ -2570,7 +2570,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.mercadopago.com/v1/payments/search?limit=30&range=date_created&begin_date=2019-8-4T00:00:00.001-04:00&end_date=2019-9-4T23:59:59.999-04:00&sort=date_created&criteria=desc&access_token=APP_USR-8499883828799661-062409-bf057c51fc05f87eba5608328f869879-446566691&external_reference=",
+							"raw": "https://api.mercadopago.com/v1/payments/search?limit=30&range=date_created&begin_date=2019-8-4T00:00:00.001-04:00&end_date=2019-9-4T23:59:59.999-04:00&sort=date_created&criteria=desc&access_token=----&external_reference=",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -2609,7 +2609,7 @@
 								},
 								{
 									"key": "access_token",
-									"value": "APP_USR-8499883828799661-062409-bf057c51fc05f87eba5608328f869879-446566691"
+									"value": "---"
 								},
 								{
 									"key": "external_reference",
